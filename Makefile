@@ -1,10 +1,12 @@
-all: format
+SRCS = $(wildcard *.pas) $(wildcard *.pp)
+all:
 	fpc rubik.pas
-units:
-	mkdir -p obj
-	fpc algorithm.pp -FE./obj
-	fpc output.pp -FE./obj
-clean:
 	del *.o
 	del *.ppu
-	rmdir /S /Q obj
+%.pas:
+	echo $<
+	ptop -i 4 $< $<
+%.pp:
+	echo $<
+	ptop -i 4 $< $<
+.PHONY: %.pas %.pp
