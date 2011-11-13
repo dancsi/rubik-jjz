@@ -1,10 +1,10 @@
-all: units
+all: format
 	fpc rubik.pas
 units:
+	mkdir -p obj
 	fpc algorithm.pp -FE./obj
 	fpc output.pp -FE./obj
 clean:
-	del /Q obj
-	rmdir obj
 	del *.o
 	del *.ppu
+	rmdir /S /Q obj
