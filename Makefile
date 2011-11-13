@@ -1,4 +1,4 @@
-all: format
+all:
 	fpc rubik.pas
 units:
 	mkdir -p obj
