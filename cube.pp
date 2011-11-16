@@ -36,22 +36,33 @@ begin
 end;
 
 procedure TurnFaceCW(var f: Face);
-var		i, j:integer;
-			t: Face;
+var			t: Face;
 begin
-	for i:=1 to 3 do begin
-		for j:=1 to 3 do begin
 			t[3, 1]:=f[1, 1];
-			t[2, 3]:=f[][]
-		end;
-	end;
+			t[2, 3]:=f[1, 2];
+			t[3, 1]:=f[1, 3];
+			t[1, 2]:=f[2, 1];
+			t[2, 2]:=f[2, 2];
+			t[3, 2]:=f[2, 3];
+			t[1, 1]:=f[3, 1];
+			t[2, 1]:=f[3, 2];
+			t[3, 1]:=f[3, 3];
+			f:=t;
 end;
 
 procedure TurnFaceCCW(var f: Face);
-var tmp: Face;
-		i, j:integer;
+var t: Face;
 begin
-
+	t[3, 1]:=f[1, 1];
+	t[2, 1]:=f[1, 2];
+	t[1, 1]:=f[1, 3];
+	t[3, 2]:=f[2, 1];
+	t[2, 2]:=f[2, 2];
+	t[1, 2]:=f[2, 3];
+	t[3, 3]:=f[3, 1];
+	t[2, 3]:=f[3, 2];
+	t[3, 1]:=f[1, 3];
+	t:=f;
 end;
 
 Procedure TurnU(var c: Cube);
