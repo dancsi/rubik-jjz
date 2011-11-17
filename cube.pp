@@ -35,7 +35,7 @@ begin
 	b:=t;
 end;
 
-procedure TurnFaceCW(var f: Face);
+procedure TurnFaceCW(var f: Face); {U smeru kazaljke na satu?}
 var			t: Face;
 begin
 			t[3, 1]:=f[1, 1];
@@ -50,7 +50,7 @@ begin
 			f:=t;
 end;
 
-procedure TurnFaceCCW(var f: Face);
+procedure TurnFaceCCW(var f: Face); {Obrnuto od kazaljke na satu?}
 var t: Face;
 begin
 	t[3, 1]:=f[1, 1];
