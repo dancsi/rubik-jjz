@@ -35,12 +35,12 @@ begin
 	b:=t;
 end;
 
-procedure TurnFaceCW(var f: Face); {U smeru kazaljke na satu?}
+procedure TurnFaceCW(var f: Face); {U smeru kazaljke na satu, centralno polje?}
 var			t: Face;
 begin
-			t[3, 1]:=f[1, 1];
+			t[1, 3]:=f[1, 1]; {3, 1 donji levi ugao kvadrata; 1, 1 gornji levi?}
 			t[2, 3]:=f[1, 2];
-			t[3, 1]:=f[1, 3];
+			t[3, 3]:=f[1, 3];
 			t[1, 2]:=f[2, 1];
 			t[2, 2]:=f[2, 2];
 			t[3, 2]:=f[2, 3];
@@ -50,10 +50,10 @@ begin
 			f:=t;
 end;
 
-procedure TurnFaceCCW(var f: Face); {Obrnuto od kazaljke na satu?}
+procedure TurnFaceCCW(var f: Face); {U obrnutom smeru od kazaljke na satu}
 var t: Face;
 begin
-	t[3, 1]:=f[1, 1];
+	t[3, 1]:=f[1, 1]; 
 	t[2, 1]:=f[1, 2];
 	t[1, 1]:=f[1, 3];
 	t[3, 2]:=f[2, 1];
