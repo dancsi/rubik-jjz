@@ -1,15 +1,16 @@
-unit algorithm;
 
-interface
+Unit algorithm;
 
-type Face=array[1..3,1..3] of char;
-procedure sayHelloA;
+Interface
 
-implementation
+Type Face = array[1..3,1..3] Of char;
+Procedure sayHelloA;
 
-procedure sayHelloA;
-begin
-	writeln('Hello from algorithm');
-end;
+Implementation
 
-end.
+Procedure sayHelloA;
+Begin
+  writeln('Hello from algorithm');
+End;
+
+End.
