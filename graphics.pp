@@ -89,7 +89,8 @@ begin
 		glVertex3f(x-l, y-l, 0);
 		glVertex3f(x-l, y, 0);
 	glEnd;
-	glColor3f(1, 1, 1);
+	glColor3f(0, 0, 0);
+	glLineWidth(2);
 	glBegin(GL_LINE);
 		glVertex3f(x, y, 0);
 		glVertex3f(x, y-l, 0);
@@ -118,58 +119,45 @@ var i:integer;
 Begin
     glLoadIdentity;
     glTranslatef(0, 0, -5);
+	//glMatrixMode(GL_PROJECTION);
+	glRotatef(20, 1, 0, 0);
 	glRotatef(-30, 0, 1, 0);
+	//gluLookAt(0, 5, -5, 0, 0, 0, 1, 1, 1);
+	//glMatrixMode(GL_MODELVIEW);
 	scaleFactor:=0.3;
-	glScalef(scaleFactor, scaleFactor, 1);
+	glScalef(scaleFactor, scaleFactor, scaleFactor);
+	{glColor3f(1, 0, 0);
+	DrawSquare(0, 0, 4.5);
+	//glTranslatef(3*1.5, 0, 0);
+	glRotatef(-90, 0, 1, 0);
+	glColor3f(0, 1, 0);
+	DrawSquare(0, 0, 4.5);}
 	
-    {glBegin(GL_QUADS);
-	
-    glColor3f(1, 0, 0);
-
-    glVertex3f(-0.5, -0.5, 0.5);
-    glVertex3f(0.5, -0.5, 0.5);
-    glVertex3f(0.5, -0.5, -0.5);
-    glVertex3f(-0.5, -0.5, -0.5);
-
-    glColor3f(0, 1, 0);
-
-    glVertex3f(0.5, -0.5, 0.5);
-    glVertex3f(1.5, -0.5, 0.5);
-    glVertex3f(1.5, -0.5, -0.5);
-    glVertex3f(0.5, -0.5, -0.5);
-
-    glColor3f(0, 0, 1);
-
-    glVertex3f(-0.5, -0.5, -0.5);
-    glVertex3f(1.5, -0.5, -0.5);
-    glVertex3f(1.5, 1, -0.5);
-    glVertex3f(-0.5, 1, -0.5);
-	
-	glEnd;
-	
-	glRotatef(90, 1, 0, 0);
-	
-	glBegin(GL_QUADS);
-	
-	glVertex3f(-3, -0.5, -0.5);
-    glVertex3f(-2, -0.5, -0.5);
-    glVertex3f(-2, 1, -0.5);
-    glVertex3f(-3, 1, -0.5);
-	}
-	{Strana F}
+	{Strane B i F}
+	glColor3f(1, 1, 0);
+	//DrawSquare(0, 0, 4.5);
+	glTranslateF(0, 0, -4.5);
+	DrawFace(c.B);
+	glTranslateF(0, 0, 4.5);
 	DrawFace(c.F);
-	{Strana R}
-	glPushMatrix();
-	glTranslatef(3*1.5, 0, 0);
+	
+	{Strane L i R}
+	glTranslatef(3, 0, 0);
 	glRotatef(90, 0, 1, 0);
+	glColor3f(1, 1, 0);
+	glTranslatef(1.5, 0, 0);
+	//glutSolidCube(3);
+	//DrawSquare(0, 0, 4.5);
 	DrawFace(c.R);
-	glPopMatrix();
-	{Strana U}
-	{
-	glRotatef(-90, 1, 0, 0);
-	glTranslatef(0, 3*1.5, 0);
+	glTranslateF(0, 0, -4.5);
+	//DrawFace(c.L);
+	glTranslatef(0, 0, 4.5);
+	
+	{Strane U i D}
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(0, -3, -3);
 	DrawFace(c.U);
-	}
+	
 End;
 
 Procedure ReSizeGLScene(Width, Height: Integer);
