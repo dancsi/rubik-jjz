@@ -9,6 +9,8 @@ Type Cube =   Record
     F, B, U, D, L, R:   Face;
 End;
 
+Const FaceNames =   ['F', 'B', 'U', 'D', 'L', 'R']; {Imena stranica}
+
 Procedure TurnU(Var c: Cube); {Okrece stranu U u smeru kazaljke na satu}
 Procedure TurnIU(Var c: Cube);
 {Okrece stranu U u smeru suprotnom od smera kretanja kazaljke na satu}
@@ -31,13 +33,13 @@ Procedure TurnIL(Var c: Cube);
 Procedure TurnFaceCW(Var f: Face);
 {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 Procedure TurnFaceCCW(Var f: Face);
+
+
+
 {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
 Procedure StartingCube(Var c: Cube); {Podesava kocku na pocetni polozaj}
 Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
-
-Procedure ExecuteString(s: String; Var c: Cube); {Izvrsava vise naredbi, npr "FUDLIF"}
-Procedure ExecuteMove(move: String; Var c: Cube); {Izvrsava jednu naredbu, npr "R" ili "IR"}
 
 Implementation
 
@@ -141,40 +143,6 @@ Begin
 End;
 Procedure TurnIL(Var c: Cube);
 Begin
-End;
-
-Procedure ExecuteString(s: String; Var c: Cube);
-{Sve je to lepo ali fale komentari (na srpskom) ipak radis u "timu" :D}
-
-Var i:   integer;
-    buf:   string;
-Begin
-    buf := '';
-    For i:=1 To length(s) Do
-        Begin
-            If s[i] In ['F', 'B', 'U', 'D', 'L', 'R'] Then
-                Begin
-                    ExecuteMove(buf+s[i], c);
-                    buf := '';
-                End
-            Else If s[i]='I' Then buf := buf+'I';
-        End;
-End;
-
-Procedure ExecuteMove(move: String; Var c: Cube);
-Begin
-    If move='F' Then TurnF(c)
-    Else If move='IF' Then TurnIF(c)
-    Else If move='B' Then TurnB(c)
-    Else If move='IB' Then TurnIB(c)
-    Else If move='U' Then TurnU(c)
-    Else If move='IU' Then TurnIU(c)
-    Else If move='D' Then TurnD(c)
-    Else If move='ID' Then TurnID(c)
-    Else If move='L' Then TurnL(c)
-    Else If move='IL' Then TurnIL(c)
-    Else If move='R' Then TurnR(c)
-    Else If move='IR' Then TurnIR(c);
 End;
 
 End.

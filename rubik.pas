@@ -1,17 +1,42 @@
 
 Program rubik;
 
-Uses algorithm, RubiksCube, input, graphics;
+Uses algorithm, RubiksCube, input, graphics, glut;
 
 Var c:   Cube;
     comm:   string;
+
+Procedure DrawGLScene;
+cdecl;
 Begin
-    InitializeGraphics();
-    StartingCube(c);
-    While true Do
+    ClearScreen();
+    DrawCube(c);
+    SwapBuffers();
+End;
+
+Procedure GLKeyboard(Key: Byte; X, Y: Longint);
+cdecl;
+
+Var ch:   char;
+Begin
+    If Key = 27 Then
+        Halt(0);
+    ch := chr(key);
+    If ch In FaceNames Then
         Begin
-            readln(comm);
             ExecuteString(comm, c);
-            DrawCube(c);
-        End;
+            comm :=   '';
+        End
+    Else If ch='I' Then comm := 'I';
+    writeln(ch);
+End;
+
+Begin
+    StartingCube(c);
+
+    glutDisplayFunc(@DrawGLScene);
+    glutReshapeFunc(@ReSizeGLScene);
+    glutKeyboardFunc(@GLKeyboard);
+
+    glutMainLoop;
 End.
