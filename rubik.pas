@@ -1,9 +1,9 @@
 Program rubik;
 
-Uses algorithm, output;
+Uses algorithm, cube, input, graphics;
+
+var c:Cube;
 
 Begin
-  writeln('Welcome to the best Rubik solving program koji je ovaj grad ikada video'); {Bestest!? Now it's grammaticly correct lol}
-  SayHelloA();
-  SayHelloO();
+	StartingCube(c);
 End.
