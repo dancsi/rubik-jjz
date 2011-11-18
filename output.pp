@@ -1,14 +1,15 @@
-unit output;
 
-interface
+Unit output;
 
-procedure sayHelloO;
+Interface
 
-implementation
+Procedure sayHelloO;
 
-procedure sayHelloO;
-begin
-	writeln('Hello from output');
-end;
+Implementation
 
-end.
+Procedure sayHelloO;
+Begin
+    writeln('Hello from output');
+End;
+
+End.

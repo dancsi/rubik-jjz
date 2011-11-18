@@ -1,15 +1,17 @@
+
 Program rubik;
 
 Uses algorithm, RubiksCube, input, graphics;
 
-var c: Cube;
-	comm: string;
+Var c:   Cube;
+    comm:   string;
 Begin
-	InitializeGraphics();
-	StartingCube(c);
-	while true do begin
-		readln(comm);
-		ExecuteString(comm, c);
-		DrawCube(c);
-	end;
+    InitializeGraphics();
+    StartingCube(c);
+    While true Do
+        Begin
+            readln(comm);
+            ExecuteString(comm, c);
+            DrawCube(c);
+        End;
 End.

@@ -1,19 +1,20 @@
+
 Unit input;
 
 Interface
 
-uses RubiksCube;
+Uses RubiksCube;
 Procedure ProcessInput(Key: Byte; X, Y: Longint);
-procedure SetupGlobalCubeVariable;
+Procedure SetupGlobalCubeVariable;
 
 Implementation
 
-var LastToken: char;
+Var LastToken:   char;
 Procedure ProcessInput(Key: Byte; X, Y: Longint);
-begin
+Begin
 
-end;
-procedure SetupGlobalCubeVariable;
-begin
-end;
-end.
+End;
+Procedure SetupGlobalCubeVariable;
+Begin
+End;
+End.

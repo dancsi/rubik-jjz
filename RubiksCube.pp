@@ -1,3 +1,4 @@
+
 Unit RubiksCube;
 
 Interface
@@ -9,20 +10,28 @@ Type Cube =   Record
 End;
 
 Procedure TurnU(Var c: Cube); {Okrece stranu U u smeru kazaljke na satu}
-Procedure TurnIU(Var c: Cube); {Okrece stranu U u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnIU(Var c: Cube);
+{Okrece stranu U u smeru suprotnom od smera kretanja kazaljke na satu}
 Procedure TurnD(Var c: Cube); {Okrece stranu D u smeru kazaljke na satu}
-Procedure TurnID(Var c: Cube); {Okrece stranu D u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnID(Var c: Cube);
+{Okrece stranu D u smeru suprotnom od smera kretanja kazaljke na satu}
 Procedure TurnF(Var c: Cube); {Okrece stranu F u smeru kazaljke na satu}
-Procedure TurnIF(Var c: Cube); {Okrece stranu F u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnIF(Var c: Cube);
+{Okrece stranu F u smeru suprotnom od smera kretanja kazaljke na satu}
 Procedure TurnB(Var c: Cube); {Okrece stranu B u smeru kazaljke na satu}
-Procedure TurnIB(Var c: Cube); {Okrece stranu B u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnIB(Var c: Cube);
+{Okrece stranu B u smeru suprotnom od smera kretanja kazaljke na satu}
 Procedure TurnR(Var c: Cube); {Okrece stranu R u smeru kazaljke na satu}
-Procedure TurnIR(Var c: Cube); {Okrece stranu R u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnIR(Var c: Cube);
+{Okrece stranu R u smeru suprotnom od smera kretanja kazaljke na satu}
 Procedure TurnL(Var c: Cube); {Okrece stranu L u smeru kazaljke na satu}
-Procedure TurnIL(Var c: Cube); {Okrece stranu L u smeru suprotnom od smera kretanja kazaljke na satu}
- 
-Procedure TurnFaceCW(Var f: Face); {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
-Procedure TurnFaceCCW(Var f: Face); {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
+Procedure TurnIL(Var c: Cube);
+{Okrece stranu L u smeru suprotnom od smera kretanja kazaljke na satu}
+
+Procedure TurnFaceCW(Var f: Face);
+{Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
+Procedure TurnFaceCCW(Var f: Face);
+{Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
 Procedure StartingCube(Var c: Cube); {Podesava kocku na pocetni polozaj}
 Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
@@ -101,40 +110,41 @@ Begin
 
 End;
 Procedure TurnIU(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnD(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnID(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnF(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnIF(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnB(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnIB(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnR(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnIR(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnL(Var c: Cube);
-begin
-end;
+Begin
+End;
 Procedure TurnIL(Var c: Cube);
-begin
-end;
+Begin
+End;
 
-Procedure ExecuteString(s: String; Var c: Cube); {Sve je to lepo ali fale komentari (na srpskom) ipak radis u "timu" :D}
+Procedure ExecuteString(s: String; Var c: Cube);
+{Sve je to lepo ali fale komentari (na srpskom) ipak radis u "timu" :D}
 
 Var i:   integer;
     buf:   string;
