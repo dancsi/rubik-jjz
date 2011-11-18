@@ -6,7 +6,7 @@ Unit graphics;
 Interface
 
 Uses 
-RubiksCube, gl, glu, glut;
+RubiksCube, gl, glu, glut, crt, sysutils;
 
 Const 
     AppWidth =   640;
@@ -48,12 +48,126 @@ Begin
     ScreenWidth := glutGet(GLUT_SCREEN_WIDTH);
     ScreenHeight := glutGet(GLUT_SCREEN_HEIGHT);
     glutInitWindowPosition((ScreenWidth - AppWidth) div 2, (ScreenHeight - AppHeight) div 2);
-    glutCreateWindow('rubik-jjz');
-    glClearColor(0, 0, 0, 0);
+    glutCreateWindow('RubiksCube');
 End;
 
-Procedure DrawCube(c: Cube);
+Procedure SetGLColor(c: char);
 Begin
+    Case c Of 
+        'G':
+               Begin
+			    glColor3ub(0, 153, 0);
+               End;
+        'B':
+               Begin
+				glColor3ub(0, 0, 204);
+               End;
+        'W':
+               Begin
+				glColor3ub(255, 255, 255);
+               End;
+        'Y':
+               Begin
+				glColor3ub(0, 255, 255);
+               End;
+        'O':
+               Begin
+				glColor3ub(255, 180, 0);
+               End;
+        'R':
+               Begin
+				glColor3ub(255, 0, 0);
+               End;
+    End;
+End;
+
+procedure DrawSquare(x, y, l:Real);
+begin
+	glBegin(GL_QUADS);
+		glVertex3f(x, y, 0);
+		glVertex3f(x, y-l, 0);
+		glVertex3f(x-l, y-l, 0);
+		glVertex3f(x-l, y, 0);
+	glEnd;
+	glColor3f(1, 1, 1);
+	glBegin(GL_LINE);
+		glVertex3f(x, y, 0);
+		glVertex3f(x, y-l, 0);
+		glVertex3f(x-l, y-l, 0);
+		glVertex3f(x-l, y, 0);
+	glEnd;
+end;
+
+procedure DrawFace(f: Face);
+var i, j:integer;
+	side: real;
+begin
+	side:=1.5;
+	for i:=1 to 3 do begin
+		for j:=1 to 3 do begin
+			SetGLColor(f[i][j]);
+			DrawSquare((i-1)*side, (j-1)*side, side);
+		end;
+	end;
+end;
+
+
+Procedure DrawCube(c: Cube);
+var i:integer;
+	scaleFactor: Real;
+Begin
+    glLoadIdentity;
+    glTranslatef(0, 0, -5);
+	glRotatef(-30, 0, 1, 0);
+	scaleFactor:=0.3;
+	glScalef(scaleFactor, scaleFactor, 1);
+	
+    {glBegin(GL_QUADS);
+	
+    glColor3f(1, 0, 0);
+
+    glVertex3f(-0.5, -0.5, 0.5);
+    glVertex3f(0.5, -0.5, 0.5);
+    glVertex3f(0.5, -0.5, -0.5);
+    glVertex3f(-0.5, -0.5, -0.5);
+
+    glColor3f(0, 1, 0);
+
+    glVertex3f(0.5, -0.5, 0.5);
+    glVertex3f(1.5, -0.5, 0.5);
+    glVertex3f(1.5, -0.5, -0.5);
+    glVertex3f(0.5, -0.5, -0.5);
+
+    glColor3f(0, 0, 1);
+
+    glVertex3f(-0.5, -0.5, -0.5);
+    glVertex3f(1.5, -0.5, -0.5);
+    glVertex3f(1.5, 1, -0.5);
+    glVertex3f(-0.5, 1, -0.5);
+	
+	glEnd;
+	
+	glRotatef(90, 1, 0, 0);
+	
+	glBegin(GL_QUADS);
+	
+	glVertex3f(-3, -0.5, -0.5);
+    glVertex3f(-2, -0.5, -0.5);
+    glVertex3f(-2, 1, -0.5);
+    glVertex3f(-3, 1, -0.5);
+	}
+	{Strana F}
+	DrawFace(c.F);
+	{Strana R}
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(3*1.5, 0, 0);
+	DrawFace(c.R);
+	glPopMatrix();
+	{Strana U}
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(0, 3*1.5, 0);
+	DrawFace(c.U);
 End;
 
 Procedure ReSizeGLScene(Width, Height: Integer);
