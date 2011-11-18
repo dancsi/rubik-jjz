@@ -134,7 +134,7 @@ Procedure TurnIL(Var c: Cube);
 begin
 end;
 
-Procedure ExecuteString(s: String; Var c: Cube);
+Procedure ExecuteString(s: String; Var c: Cube); {Sve je to lepo ali fale komentari (na srpskom) ipak radis u "timu" :D}
 
 Var i:   integer;
     buf:   string;
