@@ -8,27 +8,27 @@ Type Cube =   Record
     F, B, U, D, L, R:   Face;
 End;
 
-Procedure TurnU(Var c: Cube);
-Procedure TurnIU(Var c: Cube);
-Procedure TurnD(Var c: Cube);
-Procedure TurnID(Var c: Cube);
-Procedure TurnF(Var c: Cube);
-Procedure TurnIF(Var c: Cube);
-Procedure TurnB(Var c: Cube);
-Procedure TurnIB(Var c: Cube);
-Procedure TurnR(Var c: Cube);
-Procedure TurnIR(Var c: Cube);
-Procedure TurnL(Var c: Cube);
-Procedure TurnIL(Var c: Cube);
+Procedure TurnU(Var c: Cube); {Okrece stranu U u smeru kazaljke na satu}
+Procedure TurnIU(Var c: Cube); {Okrece stranu U u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnD(Var c: Cube); {Okrece stranu D u smeru kazaljke na satu}
+Procedure TurnID(Var c: Cube); {Okrece stranu D u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnF(Var c: Cube); {Okrece stranu F u smeru kazaljke na satu}
+Procedure TurnIF(Var c: Cube); {Okrece stranu F u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnB(Var c: Cube); {Okrece stranu B u smeru kazaljke na satu}
+Procedure TurnIB(Var c: Cube); {Okrece stranu B u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnR(Var c: Cube); {Okrece stranu R u smeru kazaljke na satu}
+Procedure TurnIR(Var c: Cube); {Okrece stranu R u smeru suprotnom od smera kretanja kazaljke na satu}
+Procedure TurnL(Var c: Cube); {Okrece stranu L u smeru kazaljke na satu}
+Procedure TurnIL(Var c: Cube); {Okrece stranu L u smeru suprotnom od smera kretanja kazaljke na satu}
+ 
+Procedure TurnFaceCW(Var f: Face); {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
+Procedure TurnFaceCCW(Var f: Face); {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
-Procedure TurnFaceCW(Var f: Face);
-Procedure TurnFaceCCW(Var f: Face);
+Procedure StartingCube(Var c: Cube); {Podesava kocku na pocetni polozaj}
+Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
 
-Procedure StartingCube(Var c: Cube);
-Procedure Swap(Var a, b:char);
-
-Procedure ExecuteString(s: String; Var c: Cube);
-Procedure ExecuteMove(move: String; Var c: Cube);
+Procedure ExecuteString(s: String; Var c: Cube); {Izvrsava vise naredbi, npr "FUDLIF"}
+Procedure ExecuteMove(move: String; Var c: Cube); {Izvrsava jednu naredbu, npr "R" ili "IR"}
 
 Implementation
 
