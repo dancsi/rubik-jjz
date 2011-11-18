@@ -2,6 +2,6 @@
 ======
 
 Simply run
-`make`
+`build.bat` or `make`
 and that's it!
 
