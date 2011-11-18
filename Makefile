@@ -4,4 +4,4 @@ all: format
 	rm *.o
 	rm *.ppu
 format:
-	$(foreach FILE, $(SRCS), ptop $(FILE) $(FILE))
+	$(foreach FILE, $(SRCS), $( shell ptop -i 4 $(FILE) $(FILE)))

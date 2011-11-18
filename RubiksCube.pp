@@ -1,5 +1,4 @@
-
-Unit algorithm;
+Unit RubiksCube;
 
 Interface
 
@@ -28,6 +27,9 @@ Procedure TurnFaceCCW(Var f: Face);
 Procedure StartingCube(Var c: Cube);
 Procedure Swap(Var a, b:char);
 
+Procedure ExecuteString(s: String; Var c: Cube);
+Procedure ExecuteMove(move: String; Var c: Cube);
+
 Implementation
 
 Procedure Swap(Var a, b:char);
@@ -54,12 +56,12 @@ End;
 
 Procedure StartingCube(Var c: Cube);
 Begin
-	FillFace(c.F, 'G');
-	FillFace(c.B, 'B');
-	FillFace(c.U, 'W');
-	FillFace(c.D, 'Y');
-	FillFace(c.L, 'O');
-	FillFace(c.R, 'R');
+    FillFace(c.F, 'G');
+    FillFace(c.B, 'B');
+    FillFace(c.U, 'W');
+    FillFace(c.D, 'Y');
+    FillFace(c.L, 'O');
+    FillFace(c.R, 'R');
 End;
 
 Procedure TurnFaceCW(Var f: Face); {U smeru kazaljke na satu, centralno polje?}
@@ -91,25 +93,78 @@ Begin
     t[3, 3] := f[3, 1];
     t[2, 3] := f[3, 2];
     t[1, 3] := f[3, 3];
-    t := f;
+    f := t;
 End;
 
 Procedure TurnU(Var c: Cube);
-
-Var i, j:   integer;
 Begin
 
 End;
 Procedure TurnIU(Var c: Cube);
+begin
+end;
 Procedure TurnD(Var c: Cube);
+begin
+end;
 Procedure TurnID(Var c: Cube);
+begin
+end;
 Procedure TurnF(Var c: Cube);
+begin
+end;
 Procedure TurnIF(Var c: Cube);
+begin
+end;
 Procedure TurnB(Var c: Cube);
+begin
+end;
 Procedure TurnIB(Var c: Cube);
+begin
+end;
 Procedure TurnR(Var c: Cube);
+begin
+end;
 Procedure TurnIR(Var c: Cube);
+begin
+end;
 Procedure TurnL(Var c: Cube);
+begin
+end;
 Procedure TurnIL(Var c: Cube);
+begin
+end;
+
+Procedure ExecuteString(s: String; Var c: Cube);
+
+Var i:   integer;
+    buf:   string;
+Begin
+    buf := '';
+    For i:=1 To length(s) Do
+        Begin
+            If s[i] In ['F', 'B', 'U', 'D', 'L', 'R'] Then
+                Begin
+                    ExecuteMove(buf+s[i], c);
+                    buf := '';
+                End
+            Else If s[i]='I' Then buf := buf+'I';
+        End;
+End;
+
+Procedure ExecuteMove(move: String; Var c: Cube);
+Begin
+    If move='F' Then TurnF(c)
+    Else If move='IF' Then TurnIF(c)
+    Else If move='B' Then TurnB(c)
+    Else If move='IB' Then TurnIB(c)
+    Else If move='U' Then TurnU(c)
+    Else If move='IU' Then TurnIU(c)
+    Else If move='D' Then TurnD(c)
+    Else If move='ID' Then TurnID(c)
+    Else If move='L' Then TurnL(c)
+    Else If move='IL' Then TurnIL(c)
+    Else If move='R' Then TurnR(c)
+    Else If move='IR' Then TurnIR(c);
+End;
 
 End.
