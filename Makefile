@@ -1,6 +1,6 @@
 SRCS = $(wildcard *.pas) $(wildcard *.pp)
 all: format
-	fpc rubik.pas
+	fpc -Sh rubik.pas
 	rm *.o
 	rm *.ppu
 format:
