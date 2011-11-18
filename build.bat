@@ -1,1 +1,2 @@
-make {Sta je ovo?}
+rem Pokrenite ovaj fajl da bi kompajlirali program
+make
