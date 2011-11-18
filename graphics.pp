@@ -160,14 +160,16 @@ Begin
 	DrawFace(c.F);
 	{Strana R}
 	glPushMatrix();
-	glRotatef(90, 0, 1, 0);
 	glTranslatef(3*1.5, 0, 0);
+	glRotatef(90, 0, 1, 0);
 	DrawFace(c.R);
 	glPopMatrix();
 	{Strana U}
-	glRotatef(90, 1, 0, 0);
+	{
+	glRotatef(-90, 1, 0, 0);
 	glTranslatef(0, 3*1.5, 0);
 	DrawFace(c.U);
+	}
 End;
 
 Procedure ReSizeGLScene(Width, Height: Integer);
