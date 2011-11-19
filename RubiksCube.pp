@@ -256,7 +256,7 @@ var
 
 Begin
     
-    TurnFaceCCW{c.L);
+    TurnFaceCCW(c.L);
     a[1]:=c.D[3,1];
     a[2]:=c.D[2,1];
     a[3]:=c.D[1,1];
