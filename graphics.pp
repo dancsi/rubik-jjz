@@ -49,8 +49,8 @@ Begin
     ScreenHeight := glutGet(GLUT_SCREEN_HEIGHT);
     glutInitWindowPosition((ScreenWidth - AppWidth) div 2, (ScreenHeight - AppHeight) div 2);
     glutCreateWindow('RubiksCube');
-	glEnable(GL_DEPTH_TEST);
-	glDepthMask(GL_TRUE);
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
 End;
 
 Procedure SetGLColor(c: char);
@@ -58,108 +58,114 @@ Begin
     Case c Of 
         'G':
                Begin
-			    glColor3ub(0, 153, 0);
+                   glColor3ub(0, 153, 0);
                End;
         'B':
                Begin
-				glColor3ub(0, 0, 204);
+                   glColor3ub(0, 0, 204);
                End;
         'W':
                Begin
-				glColor3ub(255, 255, 255);
+                   glColor3ub(255, 255, 255);
                End;
         'Y':
                Begin
-				glColor3ub(0, 255, 255);
+                   glColor3ub(0, 255, 255);
                End;
         'O':
                Begin
-				glColor3ub(255, 180, 0);
+                   glColor3ub(255, 180, 0);
                End;
         'R':
                Begin
-				glColor3ub(255, 0, 0);
+                   glColor3ub(255, 0, 0);
                End;
     End;
 End;
 
-procedure DrawSquare(x, y, l:Real);
-begin
-	glBegin(GL_QUADS);
-		glVertex3f(x, y, 0);
-		glVertex3f(x, y-l, 0);
-		glVertex3f(x-l, y-l, 0);
-		glVertex3f(x-l, y, 0);
-	glEnd;
-	glColor3f(0, 0, 0);
-	glLineWidth(2);
-	glBegin(GL_LINE);
-		glVertex3f(x, y, 0);
-		glVertex3f(x, y-l, 0);
-		glVertex3f(x-l, y-l, 0);
-		glVertex3f(x-l, y, 0);
-	glEnd;
-end;
+Procedure DrawSquare(x, y, l:Real);
+Begin
+    glBegin(GL_QUADS);
+    glVertex3f(x, y, 0);
+    glVertex3f(x, y-l, 0);
+    glVertex3f(x-l, y-l, 0);
+    glVertex3f(x-l, y, 0);
+    glEnd;
+    glColor3f(0, 0, 0);
+    glLineWidth(2);
+    glBegin(GL_LINE);
+    glVertex3f(x, y, 0);
+    glVertex3f(x, y-l, 0);
+    glVertex3f(x-l, y-l, 0);
+    glVertex3f(x-l, y, 0);
+    glEnd;
+End;
 
-procedure DrawFace(f: Face);
-var i, j:integer;
-	side: real;
-begin
-	side:=1.5;
-	for i:=1 to 3 do begin
-		for j:=1 to 3 do begin
-			SetGLColor(f[i][j]);
-			DrawSquare((i-1)*side, (j-1)*side, side);
-		end;
-	end;
-end;
+Procedure DrawFace(f: Face);
+
+Var i, j:   integer;
+    side:   real;
+Begin
+    side := 1.5;
+    For i:=1 To 3 Do
+        Begin
+            For j:=1 To 3 Do
+                Begin
+                    SetGLColor(f[i][4-j]);
+                    DrawSquare((i-1)*side, (j-1)*side, side);
+                End;
+        End;
+End;
 
 
 Procedure DrawCube(c: Cube);
-var i:integer;
-	scaleFactor: Real;
+
+Var  scaleFactor:   Real;
 Begin
     glLoadIdentity;
     glTranslatef(0, 0, -5);
-	//glMatrixMode(GL_PROJECTION);
-	glRotatef(20, 1, 0, 0);
-	glRotatef(-30, 0, 1, 0);
-	//gluLookAt(0, 5, -5, 0, 0, 0, 1, 1, 1);
-	//glMatrixMode(GL_MODELVIEW);
-	scaleFactor:=0.3;
-	glScalef(scaleFactor, scaleFactor, scaleFactor);
-	{glColor3f(1, 0, 0);
+    //glMatrixMode(GL_PROJECTION);
+    glRotatef(20, 1, 0, 0);
+    glRotatef(-30, 0, 1, 0);
+    //gluLookAt(0, 5, -5, 0, 0, 0, 1, 1, 1);
+    //glMatrixMode(GL_MODELVIEW);
+    scaleFactor := 0.3;
+    glScalef(scaleFactor, scaleFactor, scaleFactor);
+
+{glColor3f(1, 0, 0);
 	DrawSquare(0, 0, 4.5);
 	//glTranslatef(3*1.5, 0, 0);
 	glRotatef(-90, 0, 1, 0);
 	glColor3f(0, 1, 0);
 	DrawSquare(0, 0, 4.5);}
-	
-	{Strane B i F}
-	glColor3f(1, 1, 0);
-	//DrawSquare(0, 0, 4.5);
-	glTranslateF(0, 0, -4.5);
-	DrawFace(c.B);
-	glTranslateF(0, 0, 4.5);
-	DrawFace(c.F);
-	
-	{Strane L i R}
-	glTranslatef(3, 0, 0);
-	glRotatef(90, 0, 1, 0);
-	glColor3f(1, 1, 0);
-	glTranslatef(1.5, 0, 0);
-	//glutSolidCube(3);
-	//DrawSquare(0, 0, 4.5);
-	DrawFace(c.R);
-	glTranslateF(0, 0, -4.5);
-	DrawFace(c.L);
-	glTranslatef(0, 0, 4.5);
-	
-	{Strane U i D}
-	glRotatef(90, 1, 0, 0);
-	glTranslatef(0, -3, -3);
-	DrawFace(c.U);
-	
+
+ {Strane B i F}
+    glColor3f(1, 1, 0);
+    //DrawSquare(0, 0, 4.5);
+    glTranslateF(0, 0, -4.5);
+    DrawFace(c.B);
+    glTranslateF(0, 0, 4.5);
+    DrawFace(c.F);
+
+ {Strane L i R}
+    glTranslatef(3, 0, 0);
+    glRotatef(90, 0, 1, 0);
+    glColor3f(1, 1, 0);
+    glTranslatef(1.5, 0, 0);
+    //glutSolidCube(3);
+    //DrawSquare(0, 0, 4.5);
+    DrawFace(c.R);
+    glTranslateF(0, 0, -4.5);
+    DrawFace(c.L);
+    glTranslatef(0, 0, 4.5);
+
+ {Strane U i D}
+    glRotatef(90, 1, 0, 0);
+    glTranslatef(0, -3, -3);
+    DrawFace(c.U);
+    glTranslatef(0, 0, 0);
+    DrawFace(c.D);
+
 End;
 
 Procedure ReSizeGLScene(Width, Height: Integer);

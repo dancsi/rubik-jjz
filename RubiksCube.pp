@@ -38,6 +38,7 @@ Procedure TurnFaceCCW(Var f: Face);
 
 
 
+
 {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
 Procedure StartingCube(Var c: Cube); {Podesava kocku na pocetni polozaj}
