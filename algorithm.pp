@@ -1,4 +1,3 @@
-
 Unit algorithm;
 
 Interface
@@ -77,9 +76,36 @@ begin
 	Solve:=moves;
 end;
 
-procedure TurnUpsideDown(var c: Cube); {Okrece kocku naglavacke}
-begin
+procedure TurnUpsideDown(var c: Cube);{Okrece kocku naglavacke}
+var
+ i,j:integer;
+a:face;
 
+begin
+  for i := 1 to 3 do
+    for j := 1 to 3 do
+     a[i,j]:=c.d[i,j];
+for i := 1 to 3 do
+  for j:= 1 to 3 do begin
+  c.d[i,j]:=c.u[i,j];
+  c.u[i,j]:=a[i,j];
+end;
+TurnFaceCW(c.r); turnfaceCW(c.r);
+TurnFaceCCW(c.L); TurnFaceCCw(c.l);
+
+for i := 1 to 3 do
+  for j := 1 to 3 do begin
+    a[i,j]:=f.l[i,j];
+c.f[1,1]:=c.b[3,3];
+c.f[1,2]:=c.b[3,2];
+c.f[1,3]:=c.b[3,1];
+c.f[2,1]:=c.b[2,3];
+c.f[2,2]:=c.b[2,2];
+c.f[2,3]:=c.b[2,1];
+c.f[3,1]:=c.b[1,3];
+c.f[3,2]:=c.b[1,2];
+c.f[3,3]:=c.b[1,1];
+end;
 end;
 
 End.
