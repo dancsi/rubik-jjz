@@ -174,7 +174,7 @@ Begin
 End;
 Procedure TurnID(Var c: Cube);
 var
-    a : array[1..3] of array;
+    a : array[1..3] of char;
 Begin
     TurnFaceCCW(c.D);
     a[1]:=c.F[3,1];
