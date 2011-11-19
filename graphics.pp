@@ -14,8 +14,7 @@ Const
 
 Procedure InitializeGraphics;
 Procedure DrawCube(c: Cube);
-Procedure ReSizeGLScene(Width, Height: Integer);
-cdecl;
+Procedure ReSizeGLScene(Width, Height: Integer); cdecl;
 Procedure ClearScreen;
 Procedure SwapBuffers;
 

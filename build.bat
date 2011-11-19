@@ -1,5 +1,5 @@
 @echo off
 rem Pokrenite ovaj fajl da bi kompajlirali program
 make
-cls
+rem cls
 cmd /K rubik.exe

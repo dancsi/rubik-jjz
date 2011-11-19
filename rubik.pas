@@ -4,9 +4,8 @@ Program rubik;
 Uses algorithm, RubiksCube, input, graphics, glut;
 
 Var c:   Cube;
-    comm:   string;
 
-Procedure DrawGLScene;
+Procedure DrawCallback;
 cdecl;
 Begin
     ClearScreen();
@@ -14,29 +13,34 @@ Begin
     SwapBuffers();
 End;
 
-Procedure GLKeyboard(Key: Byte; X, Y: Longint);
+Procedure KeyboardCallback(Key: Byte; X, Y: Longint);
 cdecl;
+begin
+	ProcessKeyboard(key, X, Y, c);
+end;
 
-Var ch:   char;
-Begin
-    If Key = 27 Then
-        Halt(0);
-    ch := chr(key);
-    If ch In FaceNames Then
-        Begin
-            ExecuteString(comm, c);
-            comm :=   '';
-        End
-    Else If ch='I' Then comm := 'I';
-    writeln(ch);
-End;
+procedure MouseCallback(button, state, x ,y:longint); cdecl;
+begin
+	writeln(button);
+	writeln(state);
+	writeln(x, ' ', y);
+	ProcessMouse(button, state, x, y, c);
+end;
+
+procedure MotionCallback(x, y:longint); cdecl;
+begin
+	writeln(x, ' ', y);
+	ProcessMouseMotion(x, y, c);
+end;
 
 Begin
     StartingCube(c);
 
-    glutDisplayFunc(@DrawGLScene);
+    glutDisplayFunc(@DrawCallback);
     glutReshapeFunc(@ReSizeGLScene);
-    glutKeyboardFunc(@GLKeyboard);
-
+    glutKeyboardFunc(@KeyboardCallback);
+	glutMouseFunc(@MouseCallback);
+	glutMotionFunc(@MotionCallback);
+	
     glutMainLoop;
 End.
