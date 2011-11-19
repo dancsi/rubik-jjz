@@ -247,7 +247,28 @@ Begin
     c.D[3,1]:=a[3];
 End;
 Procedure TurnIL(Var c: Cube);
+var  
+    a:array[1..3] of char;
+
 Begin
+    
+    TurnFaceCCW{c.L);
+    a[1]:=c.D[3,1];
+    a[2]:=c.D[2,1];
+    a[3]:=c.D[1,1];
+    c.D[3,1]:=c.B[1,3];
+    c.D[2,1]:=c.B[2,3];
+    c.D[1,1]:=c.B[3,3];
+    c.B[1,3]:=c.U[3,1];
+    c.B[2,3]:=c.U[2,1];
+    c.B[3,3]:=c.U[1,1];
+    c.U[1,1]:=c.F[1,1];
+    c.U[2,1]:=c.F[2,1];
+    c.U[3,1]:=c.F[3,1];
+    c.F[1,1]:=a[3];
+    c.F[2,1]:=a[2];
+    c.F[3,1]:=a[1];
+
 End;
 
 End.
