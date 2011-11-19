@@ -21,6 +21,7 @@ Procedure ClearScreen;
 Procedure SwapBuffers;
 Procedure RotateCube(x, y:Real; c: Cube);
 Procedure RedrawScreen(c: Cube);
+Procedure SetupLights;
 
 Var YRot, XRot:   real;
 
@@ -42,6 +43,13 @@ Begin
     glutInit(@CmdCount, @Cmd);
 End;
 
+procedure SetupLights;
+var 
+	mat_specular: array[1..4] of GLFloat = (1, 1, 1, 1);
+	
+begin
+end;
+
 Procedure InitializeGraphics;
 
 Var 
@@ -59,6 +67,7 @@ Begin
     glDepthMask(GL_TRUE);
     yRot := -30;
     xRot := 20;
+	SetupLights;
 End;
 
 Procedure SetGLColor(c: char);
@@ -99,14 +108,20 @@ Begin
     glVertex3f(x-l, y-l, 0);
     glVertex3f(x-l, y, 0);
     glEnd;
+	//OKVIR
+	glDisable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
     glColor3f(0, 0, 0);
-    glLineWidth(2);
-    glBegin(GL_LINE);
-    glVertex3f(x, y, 0.1);
-    glVertex3f(x, y-l, 0.1);
-    glVertex3f(x-l, y-l, 0.1);
-    glVertex3f(x-l, y, 0.1);
+    glLineWidth(1);
+    glBegin(GL_LINE_LOOP);
+    glVertex3f(x, y, 0.0);
+    glVertex3f(x, y-l, 0.0);
+    glVertex3f(x-l, y-l, 0.0);
+    glVertex3f(x-l, y, 0.0);
     glEnd;
+	glDisable(GL_BLEND);
+    glEnable(GL_TEXTURE_2D); 
 End;
 
 Procedure DrawFace(f: Face);
