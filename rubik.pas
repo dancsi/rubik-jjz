@@ -36,13 +36,7 @@ End;
 
 Begin
     StartingCube(c);
-
-{c.F[1, 3]:='B';
-	c.B[1, 3]:='W';
-	c.L[1, 3]:='B';
-	c.R[1, 3]:='B';
-	c.U[1, 3]:='B';
-	c.D[1, 3]:='B';}
+	
     glutDisplayFunc(@DrawCallback);
     glutReshapeFunc(@ReSizeGLScene);
     glutKeyboardFunc(@KeyboardCallback);

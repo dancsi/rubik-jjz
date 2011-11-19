@@ -32,15 +32,9 @@ Procedure TurnIL(Var c: Cube);
 
 Procedure TurnFaceCW(Var f: Face);
 {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
-Procedure TurnFaceCCW(Var f: Face);
+Procedure TurnFaceCCW(Var f: Face); {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
-
-
-
-
-
-
-{Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
+Procedure DumpCube(c: Cube);
 
 Procedure StartingCube(Var c: Cube); {Podesava kocku na pocetni polozaj}
 Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
@@ -55,6 +49,29 @@ Begin
     a := b;
     b := t;
 End;
+
+Procedure DumpFace(f: Face);
+begin
+	writeln(f[1, 1]:2, f[1, 2]:2, f[1, 3]:2);
+	writeln(f[2, 1]:2, f[2, 2]:2, f[2, 3]:2);
+	writeln(f[3, 1]:2, f[3, 2]:2, f[3, 3]:2);
+end;
+
+Procedure DumpCube(c: Cube);
+begin
+	writeln('F');
+	DumpFace(c.F);
+	writeln('B');
+	DumpFace(c.B);
+	writeln('U');
+	DumpFace(c.U);
+	writeln('D');
+	DumpFace(c.D);
+	writeln('L');
+	DumpFace(c.L);
+	writeln('R');
+	DumpFace(c.R);
+end;
 
 Procedure FillFace(Var f: Face; color: Char);
 Begin
@@ -116,8 +133,7 @@ Procedure TurnU(Var c: Cube);
 Var 
     pom :   array [1..3] Of char;
 Begin
- {Ovo je bio bofl pos'o}
-    write('U ');
+    write('TurnU ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
     pom[2] := c.F[1, 2];

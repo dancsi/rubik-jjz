@@ -55,6 +55,7 @@ Begin
     glutInitWindowPosition((ScreenWidth - AppWidth) div 2, (ScreenHeight - AppHeight) div 2);
     glutCreateWindow('Rubik''s Cube');
     glEnable(GL_DEPTH_TEST);
+	glEnable (GL_LINE_SMOOTH);
     glDepthMask(GL_TRUE);
     yRot := -30;
     xRot := 20;
@@ -101,10 +102,10 @@ Begin
     glColor3f(0, 0, 0);
     glLineWidth(2);
     glBegin(GL_LINE);
-    glVertex3f(x, y, 0);
-    glVertex3f(x, y-l, 0);
-    glVertex3f(x-l, y-l, 0);
-    glVertex3f(x-l, y, 0);
+    glVertex3f(x, y, 0.1);
+    glVertex3f(x, y-l, 0.1);
+    glVertex3f(x-l, y-l, 0.1);
+    glVertex3f(x-l, y, 0.1);
     glEnd;
 End;
 
@@ -135,7 +136,7 @@ Begin
     //glMatrixMode(GL_PROJECTION);
     glRotatef(xRot, 1, 0, 0);
     glRotatef(yRot, 0, 1, 0);
-    writeln('Y rotation: ', yRot:5:2);
+    //writeln('Y rotation: ', yRot:5:2);
     //gluLookAt(0, 5, -5, 0, 0, 0, 1, 1, 1);
     //glMatrixMode(GL_MODELVIEW);
     scaleFactor := 0.3;
@@ -143,10 +144,13 @@ Begin
 
  {Strane B i F}
     glPushMatrix();
-    glRotatef(180, 0, 1, 0);
+    glRotatef(0, 0, 1, 0);
+	glRotatef(-90, 0, 0, 1);
+	glTranslateF(-CubieSide, -CubieSide, 0);
     DrawFace(c.F);
-    glTranslateF(CubieSide, 0, 3*CubieSide);
-    glRotateF(180, 0, 1, 0);
+    glTranslateF(0, 0, -3*CubieSide);
+	glRotateF(180, 1, 0, 0);
+	glTranslateF(0, -CubieSide, 0);
     DrawFace(c.B);
     glPopMatrix();
 
@@ -154,9 +158,13 @@ Begin
     glPushMatrix();
     glTranslatef(CubieSide, 0, -2*CubieSide);
     glRotatef(-90, 0, 1, 0);
+	glRotateF(180, 0, 1, 0);
+	glRotateF(-90, 0, 0, 1);
+	glTranslateF(-CubieSide, -CubieSide, 0);
     DrawFace(c.R);
-    glTranslatef(CubieSide, 0, 3*CubieSide);
-    glRotatef(180, 0, 1, 0);
+    glTranslatef(CubieSide, 0, -3*CubieSide);
+    glRotatef(180, 1, 0, 0);
+	glTranslateF(-CubieSide, -CubieSide, 0);
     DrawFace(c.L);
     glPopMatrix();
 
@@ -165,10 +173,13 @@ Begin
     //glRotatef(180, 0, 1, 0);
     glTranslatef(0, 2*CubieSide, -CubieSide);
     glRotatef(90, 1, 0, 0);
-    glRotatef(180, 0, 0, 1);
-    DrawFace(c.U);
-    glTranslatef(0, CubieSide, 3*CubieSide);
     glRotatef(180, 1, 0, 0);
+	glRotatef(-90, 0, 0, 1);
+	glTranslateF(-CubieSide, -CubieSide, 0);
+    DrawFace(c.U);
+    glTranslatef(0, CubieSide, -3*CubieSide);
+    glRotatef(180, 0, 1, 0);
+	glTranslateF(-CubieSide, -CubieSide, 0);
     DrawFace(c.D);
     glPopMatrix();
 

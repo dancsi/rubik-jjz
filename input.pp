@@ -11,11 +11,18 @@ Var buff:   string;
 Procedure ProcessKeyboard(Key: Byte; X, Y: Longint; Var c: Cube);
 Procedure ProcessMouse(button, state, x ,y:longint; Var c: Cube);
 Procedure ProcessMouseMotion(x, y:Longint; Var c: Cube);
+Procedure UpperCase(var c: Char);
 
 Const MouseRotationScaleX =   0.1;
     MouseRotationScaleY =   -0.1;
+	AtomicCubeRotation = 2;
 
 Implementation
+
+Procedure UpperCase(var c: Char);
+begin
+	if c in ['a'..'z'] then c:=chr(ord(c)+ord('A')-ord('a'));
+end;
 
 Procedure ProcessKeyboard(Key: Byte; X, Y: Longint; Var c: Cube);
 
@@ -24,13 +31,33 @@ Begin
     If Key = 27 Then
         Halt(0);
     ch := chr(key);
+	UpperCase(ch);
     If ch In FaceNames Then
         Begin
             ExecuteString(buff + ch, c);
             buff :=   '';
         End
-    Else If ch='I' Then buff := 'I';
-    writeln(ch);
+    Else If ch='I' Then buff := 'I' else begin
+		case ch of
+			'8': begin
+				 RotateCube(AtomicCubeRotation, 0, c);
+			end;
+			'5': begin 
+				RotateCube(-AtomicCubeRotation, 0, c);
+			end;
+			'4': begin
+				RotateCube(0, -AtomicCubeRotation, c);
+			end;
+			'6': begin
+				RotateCube(0, AtomicCubeRotation, c);
+			end;
+			'7': begin
+				yRot := -30;
+				xRot := 20;
+			end;
+		end;
+	end;
+	DumpCube(c);
 End;
 
 Procedure StartUpdatingRotation(x, y:longint);
