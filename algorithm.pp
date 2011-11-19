@@ -1,3 +1,4 @@
+
 Unit algorithm;
 
 Interface
@@ -6,14 +7,15 @@ Uses RubiksCube;
 
 Procedure ExecuteString(s: String; Var c: Cube); {Izvrsava vise naredbi, npr "FUDLIF"}
 Procedure ExecuteMove(move: String; Var c: Cube); {Izvrsava jednu naredbu, npr "R" ili "IR"}
-function Shuffle(var c: Cube): string; {Stavlja kocku u slucajan polozaj}
-function Solved(c: Cube):boolean; {Da li je kocka resena}
-function Solve(var c: Cube): string; {Resava kocku. Samo ovo se poziva iz glavnog programa}
-procedure TurnUpsideDown(var c: Cube); {Okrece kocku naglavacke}
-function NextMove(var c: Cube): string; {Odlucuje koji ce biti sledeci potez i vraca string sa naredbama}
-function DoUpperLayer(var c: Cube): string; {Slaze gornji sloj}
-function DoMiddleLayer(var c: Cube): string; {Slaze Srednji sloj}
-function DoLowerLayer(var c: Cube): string; {Slaze donji sloj}
+Function Shuffle(Var c: Cube):   string; {Stavlja kocku u slucajan polozaj}
+Function Solved(c: Cube):   boolean; {Da li je kocka resena}
+Function Solve(Var c: Cube):   string; {Resava kocku. Samo ovo se poziva iz glavnog programa}
+Procedure TurnUpsideDown(Var c: Cube); {Okrece kocku naglavacke}
+Function NextMove(Var c: Cube):   string;
+{Odlucuje koji ce biti sledeci potez i vraca string sa naredbama}
+Function DoUpperLayer(Var c: Cube):   string; {Slaze gornji sloj}
+Function DoMiddleLayer(Var c: Cube):   string; {Slaze Srednji sloj}
+Function DoLowerLayer(Var c: Cube):   string; {Slaze donji sloj}
 
 Implementation
 
@@ -28,7 +30,7 @@ Begin
         Begin
             If s[i] In FaceNames Then
                 Begin
-					writeln('Will execute ', buf+s[i]);
+                    writeln('Will execute ', buf+s[i]);
                     ExecuteMove(buf+s[i], c);
                     buf := '';
                 End
@@ -52,53 +54,74 @@ Begin
     Else If move='IR' Then TurnIR(c);
 End;
 
-function NextMove(var c: Cube):string;
+Function NextMove(Var c: Cube):   string;
+Begin
+    NextMove := '';
+End;
+
+Function Solved(c: Cube):   Boolean;
+Begin
+    Solved := false;
+End;
+
+Function Shuffle(Var c: Cube):   string;
+Begin
+    Shuffle := '';
+End;
+
+Function Solve(Var c: Cube):   string;
+
+Var moves:   string;
+Begin
+    While Not Solved(c) Do
+        Begin
+            moves := moves+NextMove(c);
+        End;
+    Solve := moves;
+End;
+
+Procedure TurnUpsideDown(Var c: Cube);{Okrece kocku naglavacke}
+
+Var 
+    i,j:   integer;
+    a:   face;
+
+Begin
+    a := c.d;
+    c.d := c.u;
+    c.u := a;   {zamena gornje i donje strane}
+
+    TurnFaceCW(c.r);
+    turnfaceCW(c.r);        {rotiranje desne i leve strane}
+    TurnFaceCCW(c.L);
+    TurnFaceCCw(c.l);
+
+    a := c.f;               {zamena prednje i zadnje strane}
+
+    c.f[1,1] := c.b[3,3];
+    c.f[1,2] := c.b[3,2];
+    c.f[1,3] := c.b[3,1];
+    c.f[2,1] := c.b[2,3];
+    c.f[2,2] := c.b[2,2];
+    c.f[2,3] := c.b[2,1];
+    c.f[3,1] := c.b[1,3];
+    c.f[3,2] := c.b[1,2];
+    c.f[3,3] := c.b[1,1];
+
+    c.b := a;
+End;
+
+Function DoUpperLayer(Var c: Cube):   string; {Slaze gornji sloj}
 begin
-	NextMove:='';
+	DoUpperLayer:='';
 end;
-
-function Solved(c: Cube): Boolean;
+Function DoMiddleLayer(Var c: Cube):   string; {Slaze Srednji sloj}
 begin
-	Solved:=false;
+	DoMiddleLayer:='';
 end;
-
-function Shuffle(var c: Cube): string;
+Function DoLowerLayer(Var c: Cube):   string; {Slaze donji sloj}
 begin
-	Shuffle:='';
+	DoLowerLayer:='';
 end;
-
-function Solve(var c: Cube): string;
-var moves: string;
-begin
-	while not Solved(c) do begin
-		moves:= moves+NextMove(c);
-	end;
-	Solve:=moves;
-end;
-
-procedure TurnUpsideDown(var c: Cube);{Okrece kocku naglavacke}
-var
- i,j:integer;
-a:face;
-
-begin
-a:=c.d; c.d:=c.u; c.u:=a;   {zamena gornje i donje strane}
-
-TurnFaceCW(c.r); turnfaceCW(c.r);        {rotiranje desne i leve strane}
-TurnFaceCCW(c.L); TurnFaceCCw(c.l);
-
-a:=c.f;               {zamena prednje i zadnje strane}
-    
-c.f[1,1]:=c.b[3,3];
-c.f[1,2]:=c.b[3,2];
-c.f[1,3]:=c.b[3,1];
-c.f[2,1]:=c.b[2,3];
-c.f[2,2]:=c.b[2,2];
-c.f[2,3]:=c.b[2,1];
-c.f[3,1]:=c.b[1,3];
-c.f[3,2]:=c.b[1,2];
-c.f[3,3]:=c.b[1,1];
-
-c.b:=a;   end;
 
 End.

@@ -22,7 +22,6 @@ Begin
     ch := chr(key);
     If ch In FaceNames Then
         Begin
-			writeln('Will execute ', buff+ch);
             ExecuteString(buff + ch, c);
             buff :=   '';
         End
