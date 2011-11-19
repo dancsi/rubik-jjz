@@ -171,7 +171,7 @@ Begin
 End;
 Procedure TurnR(Var c: Cube);
 var
-    pom : array [1..3] of char;
+    a : array [1..3] of char;
 Begin
     TurnFaceCW(c.R);
     a[1] := c.F[1, 3]; 

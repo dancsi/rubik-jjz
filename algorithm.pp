@@ -58,6 +58,16 @@ begin
 	NextMove:='';
 end;
 
+function Solved(c: Cube): Boolean;
+begin
+	Solved:=false;
+end;
+
+function Shuffle(var c: Cube): string;
+begin
+	Shuffle:='';
+end;
+
 function Solve(var c: Cube): string;
 var moves: string;
 begin
