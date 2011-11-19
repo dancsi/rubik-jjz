@@ -7,6 +7,14 @@ Uses RubiksCube;
 
 Procedure ExecuteString(s: String; Var c: Cube); {Izvrsava vise naredbi, npr "FUDLIF"}
 Procedure ExecuteMove(move: String; Var c: Cube); {Izvrsava jednu naredbu, npr "R" ili "IR"}
+function Shuffle(var c: Cube): string; {Stavlja kocku u slucajan polozaj}
+function Solved(c: Cube):boolean; {Da li je kocka resena}
+function Solve(var c: Cube): string; {Resava kocku. Samo ovo se poziva iz glavnog programa}
+procedure TurnUpsideDown(var c: Cube); {Okrece kocku naglavacke}
+function NextMove(var c: Cube): string; {Odlucuje koji ce biti sledeci potez i vraca string sa naredbama}
+function DoUpperLayer(var c: Cube): string; {Slaze gornji sloj}
+function DoMiddleLayer(var c: Cube): string; {Slaze Srednji sloj}
+function DoLowerLayer(var c: Cube): string; {Slaze donji sloj}
 
 Implementation
 
@@ -44,5 +52,16 @@ Begin
     Else If move='R' Then TurnR(c)
     Else If move='IR' Then TurnIR(c);
 End;
+
+
+
+function Solve(var c: Cube): string;
+var moves: string;
+begin
+	while not Solved(c) do begin
+		moves:= moves+NextMove(c);
+	end;
+	Solve:=moves;
+end;
 
 End.
