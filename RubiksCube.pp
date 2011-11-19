@@ -131,7 +131,25 @@ Begin
     L[1, 3] := pom[3];
 End;
 Procedure TurnIU(Var c: Cube);
+var
+    pom : array [1..3] of char;
 Begin
+    TurnFaceCW(U);
+    pom[1] := F[1, 1];
+    pom[2] := F[1, 2];
+    pom[3] := F[1. 3];
+    F[1, 1] := L[1, 1];
+    F[1, 2] := L[1, 2];
+    F[1, 3] := L[1, 3];
+    L[1, 1] := B[1, 1];
+    L[1, 2] := B[1, 2];
+    L[1, 3] := B[1, 3];
+    B[1, 1] := R[1, 1];
+    B[1, 2] := R[1, 2];
+    B[1, 3] := R[1, 3];
+    R[1, 1] := pom[1];
+    R[1, 2] := pom[2];
+    R[1, 3] := pom[3];
 End;
 Procedure TurnD(Var c: Cube);
 Begin
