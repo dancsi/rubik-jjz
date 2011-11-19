@@ -51,7 +51,7 @@ begin
 end;
 procedure ProcessMouseMotion(x, y:Longint; var c: Cube);
 begin
-	if 
+	 
 end;
 
 End.
