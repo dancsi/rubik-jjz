@@ -152,10 +152,46 @@ Begin
     c.R[1, 3] := pom[3];
 End;
 Procedure TurnD(Var c: Cube);
+var
+    a : array[1..3] of char;
 Begin
+    TurnFaceCW(c.D);
+    a[1]:=c.F[3,1];
+    a[2]:=c.F[3,2];
+    a[3]:=c.F[3,3];
+    c.F[3,1]:=c.L[3,1];
+    c.F[3,2]:=c.L[3,2];
+    c.F[3,3]:=c.L[3,3];
+    c.L[3,1]:=c.B[3,1];
+    c.L[3,2]:=c.B[3,2];
+    c.L[3,3]:=c.B[3,3];
+    c.B[3,1]:=c.R[3,1];
+    c.B[3,2]:=c.R[3,2];
+    c.B[3,3]:=c.R[3,3];
+    c.R[3,1]:=a[1];
+    c.R[3,2]:=a[2];
+    c.R[3,3]:=a[3];  
 End;
 Procedure TurnID(Var c: Cube);
+var
+    a : array[1..3] of array;
 Begin
+    TurnFaceCCW(c.D);
+    a[1]:=c.F[3,1];
+    a[2]:=c.F[3,2];
+    a[3]:=c.F[3,3];
+    c.F[3,1]:=c.R[3,1];
+    c.F[3,2]:=c.R[3,2];
+    c.F[3,3]:=c.R[3,3];
+    c.R[3,1]:=c.B[3,1];
+    c.R[3,2]:=c.B[3,2];
+    c.R[3,3]:=c.B[3,3];
+    c.B[3,1]:=c.L[3,1];
+    c.B[3,2]:=c.L[3,2];
+    c.B[3,3]:=c.L[3,3];
+    c.L[3,1]:=a[1];
+    c.L[3,2]:=a[2];
+    c.L[3,3]:=a[3];   
 End;
 Procedure TurnF(Var c: Cube);
 Begin
