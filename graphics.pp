@@ -49,6 +49,8 @@ Begin
     ScreenHeight := glutGet(GLUT_SCREEN_HEIGHT);
     glutInitWindowPosition((ScreenWidth - AppWidth) div 2, (ScreenHeight - AppHeight) div 2);
     glutCreateWindow('RubiksCube');
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
 End;
 
 Procedure SetGLColor(c: char);
@@ -150,7 +152,7 @@ Begin
 	//DrawSquare(0, 0, 4.5);
 	DrawFace(c.R);
 	glTranslateF(0, 0, -4.5);
-	//DrawFace(c.L);
+	DrawFace(c.L);
 	glTranslatef(0, 0, 4.5);
 	
 	{Strane U i D}
