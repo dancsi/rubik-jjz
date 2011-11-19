@@ -77,4 +77,8 @@ begin
 	Solve:=moves;
 end;
 
+procedure TurnUpsideDown(var c: Cube); {Okrece kocku naglavacke}
+begin
+end;
+
 End.
