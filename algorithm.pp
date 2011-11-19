@@ -30,8 +30,9 @@ Begin
         Begin
             If s[i] In FaceNames Then
                 Begin
-                    writeln('Will execute ', buf+s[i]);
+                    write('moves: ');
                     ExecuteMove(buf+s[i], c);
+                    writeln;
                     buf := '';
                 End
             Else If s[i]='I' Then buf := buf+'I';
@@ -112,16 +113,16 @@ Begin
 End;
 
 Function DoUpperLayer(Var c: Cube):   string; {Slaze gornji sloj}
-begin
-	DoUpperLayer:='';
-end;
+Begin
+    DoUpperLayer := '';
+End;
 Function DoMiddleLayer(Var c: Cube):   string; {Slaze Srednji sloj}
-begin
-	DoMiddleLayer:='';
-end;
+Begin
+    DoMiddleLayer := '';
+End;
 Function DoLowerLayer(Var c: Cube):   string; {Slaze donji sloj}
-begin
-	DoLowerLayer:='';
-end;
+Begin
+    DoLowerLayer := '';
+End;
 
 End.

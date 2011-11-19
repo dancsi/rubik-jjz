@@ -11,12 +11,18 @@ RubiksCube, gl, glu, glut, crt, sysutils;
 Const 
     AppWidth =   640;
     AppHeight =   480;
+    CubieSide =   1.5;
 
 Procedure InitializeGraphics;
 Procedure DrawCube(c: Cube);
-Procedure ReSizeGLScene(Width, Height: Integer); cdecl;
+Procedure ReSizeGLScene(Width, Height: Integer);
+cdecl;
 Procedure ClearScreen;
 Procedure SwapBuffers;
+Procedure RotateCube(x, y:Real; c: Cube);
+Procedure RedrawScreen(c: Cube);
+
+Var YRot, XRot:   real;
 
 Implementation
 
@@ -47,9 +53,11 @@ Begin
     ScreenWidth := glutGet(GLUT_SCREEN_WIDTH);
     ScreenHeight := glutGet(GLUT_SCREEN_HEIGHT);
     glutInitWindowPosition((ScreenWidth - AppWidth) div 2, (ScreenHeight - AppHeight) div 2);
-    glutCreateWindow('RubiksCube');
+    glutCreateWindow('Rubik''s Cube');
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
+    yRot := -30;
+    xRot := 20;
 End;
 
 Procedure SetGLColor(c: char);
@@ -69,7 +77,7 @@ Begin
                End;
         'Y':
                Begin
-                   glColor3ub(0, 255, 255);
+                   glColor3ub(255, 255, 0);
                End;
         'O':
                Begin
@@ -103,15 +111,13 @@ End;
 Procedure DrawFace(f: Face);
 
 Var i, j:   integer;
-    side:   real;
 Begin
-    side := 1.5;
     For i:=1 To 3 Do
         Begin
             For j:=1 To 3 Do
                 Begin
-                    SetGLColor(f[i][4-j]);
-                    DrawSquare((i-1)*side, (j-1)*side, side);
+                    SetGLColor(f[i][j]);
+                    DrawSquare((i-1)*CubieSide, (j-1)*CubieSide, CubieSide);
                 End;
         End;
 End;
@@ -120,51 +126,65 @@ End;
 Procedure DrawCube(c: Cube);
 
 Var  scaleFactor:   Real;
+    flipVectorP:   PGLFloat;
+    flipVector:   Array[1..16] Of GLFloat;
 Begin
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity;
-    glTranslatef(0, 0, -5);
+    glTranslatef(0, 0, -3*CubieSide);
     //glMatrixMode(GL_PROJECTION);
-    glRotatef(20, 1, 0, 0);
-    glRotatef(-30, 0, 1, 0);
+    glRotatef(xRot, 1, 0, 0);
+    glRotatef(yRot, 0, 1, 0);
+    writeln('Y rotation: ', yRot:5:2);
     //gluLookAt(0, 5, -5, 0, 0, 0, 1, 1, 1);
     //glMatrixMode(GL_MODELVIEW);
     scaleFactor := 0.3;
     glScalef(scaleFactor, scaleFactor, scaleFactor);
 
-{glColor3f(1, 0, 0);
-	DrawSquare(0, 0, 4.5);
-	//glTranslatef(3*1.5, 0, 0);
-	glRotatef(-90, 0, 1, 0);
-	glColor3f(0, 1, 0);
-	DrawSquare(0, 0, 4.5);}
-
  {Strane B i F}
-    glColor3f(1, 1, 0);
-    //DrawSquare(0, 0, 4.5);
-    glTranslateF(0, 0, -4.5);
-    DrawFace(c.B);
-    glTranslateF(0, 0, 4.5);
+    glPushMatrix();
+    glRotatef(180, 0, 1, 0);
     DrawFace(c.F);
+    glTranslateF(CubieSide, 0, 3*CubieSide);
+    glRotateF(180, 0, 1, 0);
+    DrawFace(c.B);
+    glPopMatrix();
 
  {Strane L i R}
-    glTranslatef(3, 0, 0);
-    glRotatef(90, 0, 1, 0);
-    glColor3f(1, 1, 0);
-    glTranslatef(1.5, 0, 0);
-    //glutSolidCube(3);
-    //DrawSquare(0, 0, 4.5);
+    glPushMatrix();
+    glTranslatef(CubieSide, 0, -2*CubieSide);
+    glRotatef(-90, 0, 1, 0);
     DrawFace(c.R);
-    glTranslateF(0, 0, -4.5);
+    glTranslatef(CubieSide, 0, 3*CubieSide);
+    glRotatef(180, 0, 1, 0);
     DrawFace(c.L);
-    glTranslatef(0, 0, 4.5);
+    glPopMatrix();
 
  {Strane U i D}
+    glPushMatrix();
+    //glRotatef(180, 0, 1, 0);
+    glTranslatef(0, 2*CubieSide, -CubieSide);
     glRotatef(90, 1, 0, 0);
-    glTranslatef(0, -3, -3);
+    glRotatef(180, 0, 0, 1);
     DrawFace(c.U);
-    glTranslatef(0, 0, 0);
+    glTranslatef(0, CubieSide, 3*CubieSide);
+    glRotatef(180, 1, 0, 0);
     DrawFace(c.D);
+    glPopMatrix();
 
+End;
+
+Procedure RedrawScreen(c: Cube);
+Begin
+    ClearScreen;
+    DrawCube(c);
+    SwapBuffers;
+End;
+
+Procedure RotateCube(x, y:Real; c: Cube);
+Begin
+    XRot := XRot+x;
+    YRot := YRot+y;
 End;
 
 Procedure ReSizeGLScene(Width, Height: Integer);

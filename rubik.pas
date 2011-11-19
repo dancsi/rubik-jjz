@@ -8,39 +8,46 @@ Var c:   Cube;
 Procedure DrawCallback;
 cdecl;
 Begin
-    ClearScreen();
-    DrawCube(c);
-    SwapBuffers();
+    RedrawScreen(c);
 End;
 
 Procedure KeyboardCallback(Key: Byte; X, Y: Longint);
 cdecl;
-begin
-	ProcessKeyboard(key, X, Y, c);
-end;
+Begin
+    ProcessKeyboard(key, X, Y, c);
+    DrawCallback;
+End;
 
-procedure MouseCallback(button, state, x ,y:longint); cdecl;
-begin
-	writeln(button);
-	writeln(state);
-	writeln(x, ' ', y);
-	ProcessMouse(button, state, x, y, c);
-end;
+Procedure MouseCallback(button, state, x ,y:longint);
+cdecl;
+Begin
+    writeln(button);
+    writeln(state);
+    writeln(x, ' ', y);
+    ProcessMouse(button, state, x, y, c);
+End;
 
-procedure MotionCallback(x, y:longint); cdecl;
-begin
-	writeln(x, ' ', y);
-	ProcessMouseMotion(x, y, c);
-end;
+Procedure MotionCallback(x, y:longint);
+cdecl;
+Begin
+    writeln(x, ' ', y);
+    ProcessMouseMotion(x, y, c);
+End;
 
 Begin
     StartingCube(c);
-	c.U[1, 1]:='O';
+
+{c.F[1, 3]:='B';
+	c.B[1, 3]:='W';
+	c.L[1, 3]:='B';
+	c.R[1, 3]:='B';
+	c.U[1, 3]:='B';
+	c.D[1, 3]:='B';}
     glutDisplayFunc(@DrawCallback);
     glutReshapeFunc(@ReSizeGLScene);
     glutKeyboardFunc(@KeyboardCallback);
-	glutMouseFunc(@MouseCallback);
-	glutMotionFunc(@MotionCallback);
-	
+    glutMouseFunc(@MouseCallback);
+    glutMotionFunc(@MotionCallback);
+
     glutMainLoop;
 End.

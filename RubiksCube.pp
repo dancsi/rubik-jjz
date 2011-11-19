@@ -1,3 +1,4 @@
+
 Unit RubiksCube;
 
 Interface
@@ -32,6 +33,7 @@ Procedure TurnIL(Var c: Cube);
 Procedure TurnFaceCW(Var f: Face);
 {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 Procedure TurnFaceCCW(Var f: Face);
+
 
 
 
@@ -110,9 +112,12 @@ Begin
 End;
 
 Procedure TurnU(Var c: Cube);
-var
-    pom : array [1..3] of char;
+
+Var 
+    pom :   array [1..3] Of char;
 Begin
+ {Ovo je bio bofl pos'o}
+    write('U ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
     pom[2] := c.F[1, 2];
@@ -131,9 +136,11 @@ Begin
     c.L[1, 3] := pom[3];
 End;
 Procedure TurnIU(Var c: Cube);
-var
-    pom : array [1..3] of char;
+
+Var 
+    pom :   array [1..3] Of char;
 Begin
+    write('IU ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
     pom[2] := c.F[1, 2];
@@ -152,46 +159,50 @@ Begin
     c.R[1, 3] := pom[3];
 End;
 Procedure TurnD(Var c: Cube);
-var
-    a : array[1..3] of char;
+
+Var 
+    a :   array[1..3] Of char;
 Begin
+    write('D ');
     TurnFaceCW(c.D);
-    a[1]:=c.F[3,1];
-    a[2]:=c.F[3,2];
-    a[3]:=c.F[3,3];
-    c.F[3,1]:=c.L[3,1];
-    c.F[3,2]:=c.L[3,2];
-    c.F[3,3]:=c.L[3,3];
-    c.L[3,1]:=c.B[3,1];
-    c.L[3,2]:=c.B[3,2];
-    c.L[3,3]:=c.B[3,3];
-    c.B[3,1]:=c.R[3,1];
-    c.B[3,2]:=c.R[3,2];
-    c.B[3,3]:=c.R[3,3];
-    c.R[3,1]:=a[1];
-    c.R[3,2]:=a[2];
-    c.R[3,3]:=a[3];  
+    a[1] := c.F[3,1];
+    a[2] := c.F[3,2];
+    a[3] := c.F[3,3];
+    c.F[3,1] := c.L[3,1];
+    c.F[3,2] := c.L[3,2];
+    c.F[3,3] := c.L[3,3];
+    c.L[3,1] := c.B[3,1];
+    c.L[3,2] := c.B[3,2];
+    c.L[3,3] := c.B[3,3];
+    c.B[3,1] := c.R[3,1];
+    c.B[3,2] := c.R[3,2];
+    c.B[3,3] := c.R[3,3];
+    c.R[3,1] := a[1];
+    c.R[3,2] := a[2];
+    c.R[3,3] := a[3];
 End;
 Procedure TurnID(Var c: Cube);
-var
-    a : array[1..3] of char;
+
+Var 
+    a :   array[1..3] Of char;
 Begin
+    write('ID ');
     TurnFaceCCW(c.D);
-    a[1]:=c.F[3,1];
-    a[2]:=c.F[3,2];
-    a[3]:=c.F[3,3];
-    c.F[3,1]:=c.R[3,1];
-    c.F[3,2]:=c.R[3,2];
-    c.F[3,3]:=c.R[3,3];
-    c.R[3,1]:=c.B[3,1];
-    c.R[3,2]:=c.B[3,2];
-    c.R[3,3]:=c.B[3,3];
-    c.B[3,1]:=c.L[3,1];
-    c.B[3,2]:=c.L[3,2];
-    c.B[3,3]:=c.L[3,3];
-    c.L[3,1]:=a[1];
-    c.L[3,2]:=a[2];
-    c.L[3,3]:=a[3];   
+    a[1] := c.F[3,1];
+    a[2] := c.F[3,2];
+    a[3] := c.F[3,3];
+    c.F[3,1] := c.R[3,1];
+    c.F[3,2] := c.R[3,2];
+    c.F[3,3] := c.R[3,3];
+    c.R[3,1] := c.B[3,1];
+    c.R[3,2] := c.B[3,2];
+    c.R[3,3] := c.B[3,3];
+    c.B[3,1] := c.L[3,1];
+    c.B[3,2] := c.L[3,2];
+    c.B[3,3] := c.L[3,3];
+    c.L[3,1] := a[1];
+    c.L[3,2] := a[2];
+    c.L[3,3] := a[3];
 End;
 Procedure TurnF(Var c: Cube);
 Begin
@@ -206,72 +217,77 @@ Procedure TurnIB(Var c: Cube);
 Begin
 End;
 Procedure TurnR(Var c: Cube);
-var
-    a : array [1..3] of char;
+
+Var 
+    a :   array [1..3] Of char;
 Begin
-        TurnFaceCW(c.R);
-        a[1] := c.F[1, 3]; 
-    	a[2] := c.F[2, 3]; 
-    	a[3] := c.F[3, 3];
-    	c.F[1,3] := c.D[1,3]; 
-    	c.F[2,3] := c.D[2,3]; 
-    	c.F[3,3] := c.D[3,3];
-    	c.D[1,3] := c.B[3,1];
-    	c.D[2,3] := c.B[2,1];
-    	c.D[3,3] := c.B[1,1];
-    	c.B[1,1] := c.U[3,3];
-    	c.B[2,1] := c.U[2,3];
-	    c.B[3,1] := c.U[1,3];
-	    c.U[1,3] := a[1];
-	    c.U[2,3] := a[2];
-	    c.U[3,3] := a[3];;   
-end;
+    write('R ');
+    TurnFaceCW(c.R);
+    a[1] := c.F[1, 3];
+    a[2] := c.F[2, 3];
+    a[3] := c.F[3, 3];
+    c.F[1,3] := c.D[1,3];
+    c.F[2,3] := c.D[2,3];
+    c.F[3,3] := c.D[3,3];
+    c.D[1,3] := c.B[3,1];
+    c.D[2,3] := c.B[2,1];
+    c.D[3,3] := c.B[1,1];
+    c.B[1,1] := c.U[3,3];
+    c.B[2,1] := c.U[2,3];
+    c.B[3,1] := c.U[1,3];
+    c.U[1,3] := a[1];
+    c.U[2,3] := a[2];
+    c.U[3,3] := a[3];;
+End;
 Procedure TurnIR(Var c: Cube);
 Begin
 End;
 Procedure TurnL(Var c: Cube);
-var
-    a:array [1..3] of char;
+
+Var 
+    a:   array [1..3] Of char;
 Begin
+    write('L ');
     TurnFaceCw(c.L);
-    a[1]:=c.F[1,1];
-    a[2]:=c.F[2,1];
-    a[3]:=c.F[3,1];
-    c.F[1,1]:=c.U[1,1];
-    c.F[2,1]:=c.U[2,1];
-    c.F[3,1]:=c.U[3,1];
-    c.U[1,1]:=c.B[3,3];
-    c.U[2,1]:=c.B[2,3];
-    c.U[3,1]:=c.B[1,3];
-    c.B[1,3]:=c.D[3,1];
-    c.B[2,3]:=c.D[2,1];
-    c.B[3,3]:=c.D[1,1];
-    c.D[1,1]:=a[1];
-    c.D[2,1]:=a[2];
-    c.D[3,1]:=a[3];
+    a[1] := c.F[1,1];
+    a[2] := c.F[2,1];
+    a[3] := c.F[3,1];
+    c.F[1,1] := c.U[1,1];
+    c.F[2,1] := c.U[2,1];
+    c.F[3,1] := c.U[3,1];
+    c.U[1,1] := c.B[3,3];
+    c.U[2,1] := c.B[2,3];
+    c.U[3,1] := c.B[1,3];
+    c.B[1,3] := c.D[3,1];
+    c.B[2,3] := c.D[2,1];
+    c.B[3,3] := c.D[1,1];
+    c.D[1,1] := a[1];
+    c.D[2,1] := a[2];
+    c.D[3,1] := a[3];
 End;
 Procedure TurnIL(Var c: Cube);
-var  
-    a:array[1..3] of char;
+
+Var 
+    a:   array[1..3] Of char;
 
 Begin
-    
+    write('IL ');
     TurnFaceCCW(c.L);
-    a[1]:=c.D[3,1];
-    a[2]:=c.D[2,1];
-    a[3]:=c.D[1,1];
-    c.D[3,1]:=c.B[1,3];
-    c.D[2,1]:=c.B[2,3];
-    c.D[1,1]:=c.B[3,3];
-    c.B[1,3]:=c.U[3,1];
-    c.B[2,3]:=c.U[2,1];
-    c.B[3,3]:=c.U[1,1];
-    c.U[1,1]:=c.F[1,1];
-    c.U[2,1]:=c.F[2,1];
-    c.U[3,1]:=c.F[3,1];
-    c.F[1,1]:=a[3];
-    c.F[2,1]:=a[2];
-    c.F[3,1]:=a[1];
+    a[1] := c.D[3,1];
+    a[2] := c.D[2,1];
+    a[3] := c.D[1,1];
+    c.D[3,1] := c.B[1,3];
+    c.D[2,1] := c.B[2,3];
+    c.D[1,1] := c.B[3,3];
+    c.B[1,3] := c.U[3,1];
+    c.B[2,3] := c.U[2,1];
+    c.B[3,3] := c.U[1,1];
+    c.U[1,1] := c.F[1,1];
+    c.U[2,1] := c.F[2,1];
+    c.U[3,1] := c.F[3,1];
+    c.F[1,1] := a[3];
+    c.F[2,1] := a[2];
+    c.F[3,1] := a[1];
 
 End;
 

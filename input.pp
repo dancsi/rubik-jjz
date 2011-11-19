@@ -3,18 +3,22 @@ Unit input;
 
 Interface
 
-Uses RubiksCube, algorithm, glut;
+Uses RubiksCube, algorithm, glut, gl, graphics;
 
-var buff: string;
-	prevX, prevY:longint;
-	TrackingMouseMovement: boolean;
-procedure ProcessKeyboard(Key: Byte; X, Y: Longint; var c: Cube);
-procedure ProcessMouse(button, state, x ,y:longint; var c: Cube);
-procedure ProcessMouseMotion(x, y:Longint; var c: Cube);
+Var buff:   string;
+    prevX, prevY:   longint;
+    TrackingMouseMovement:   boolean;
+Procedure ProcessKeyboard(Key: Byte; X, Y: Longint; Var c: Cube);
+Procedure ProcessMouse(button, state, x ,y:longint; Var c: Cube);
+Procedure ProcessMouseMotion(x, y:Longint; Var c: Cube);
+
+Const MouseRotationScaleX =   0.1;
+    MouseRotationScaleY =   -0.1;
 
 Implementation
 
-procedure ProcessKeyboard(Key: Byte; X, Y: Longint; var c: Cube);
+Procedure ProcessKeyboard(Key: Byte; X, Y: Longint; Var c: Cube);
+
 Var ch:   char;
 Begin
     If Key = 27 Then
@@ -29,29 +33,38 @@ Begin
     writeln(ch);
 End;
 
-procedure StartUpdatingRotation(x, y:longint);
-begin
-	TrackingMouseMovement:=true;
-	prevX:=x;
-	prevY:=y;
-end;
+Procedure StartUpdatingRotation(x, y:longint);
+Begin
+    TrackingMouseMovement := true;
+    prevX := x;
+    prevY := y;
+End;
 
-procedure StopUpdatingRotation();
-begin
-	TrackingMouseMovement:=false;
-end;
+Procedure StopUpdatingRotation();
+Begin
+    TrackingMouseMovement := false;
+End;
 
-procedure ProcessMouse(button, state, x ,y:longint; var c: Cube);
-begin
-	if (button=GLUT_LEFT_BUTTON) and (state=GLUT_DOWN) then begin
-		StartUpdatingRotation(x, y);
-	end else if (button=GLUT_LEFT_BUTTON) and (state=GLUT_DOWN) then begin
-		StopUpdatingRotation();
-	end;
-end;
-procedure ProcessMouseMotion(x, y:Longint; var c: Cube);
-begin
-	 
-end;
+Procedure ProcessMouse(button, state, x ,y:longint; Var c: Cube);
+Begin
+    If (button=GLUT_LEFT_BUTTON) And (state=GLUT_DOWN) Then
+        Begin
+            StartUpdatingRotation(x, y);
+            RedrawScreen(c);
+            writeln('click ''n'' redraw');
+        End
+    Else If (button=GLUT_LEFT_BUTTON) And (state=GLUT_DOWN) Then
+             Begin
+                 StopUpdatingRotation();
+             End;
+End;
+Procedure ProcessMouseMotion(x, y:Longint; Var c: Cube);
+Begin
+    If (TrackingMouseMovement) Then
+        Begin
+            RotateCube(MouseRotationScaleX*(x-PrevX), MouseRotationScaleY*(y-PrevY), c);
+            RedrawScreen(c);
+        End;
+End;
 
 End.
