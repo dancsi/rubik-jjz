@@ -170,7 +170,20 @@ Procedure TurnIB(Var c: Cube);
 Begin
 End;
 Procedure TurnR(Var c: Cube);
+var
+    pom : array [1..3] of char;
 Begin
+    TurnFaceCW(c.R);
+    a[1] := F[1, 3]; 
+    a[2] := F[2, 3]; 
+    a[3] := F[3, 3];
+    F[1, 3] := D[1, 3]; 
+    F[2, 3] := D[2, 3]; 
+    F[3, 3] := D[3, 3];
+    D[1, 3] := B[3, 1];
+    D[2, 3] := B[2, 1];
+    D[3, 3] := B[1, 1];
+    B[1, 1] := U[3, 3];
 End;
 Procedure TurnIR(Var c: Cube);
 Begin
