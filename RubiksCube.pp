@@ -220,8 +220,12 @@ Begin
     c.D[2, 3] := c.B[2, 1];
     c.D[3, 3] := c.B[1, 1];
     c.B[1, 1] := c.U[3, 3];
-	{ovo treba zavrsiti}
-End;
+    c.B[2, 1] := c.U[2, 3];
+    c.B[3, 1] := c.U[1, 3];
+    c.U[1, 3] := a[1];
+    c.U[2, 3] := a[2];
+    c.U[3, 3] := a[3];   
+end;
 Procedure TurnIR(Var c: Cube);
 Begin
 End;
