@@ -1,0 +1,13 @@
+Rotacije:
+	R -- Vukasin Karadzic
+	IR -- Vukasin Karadzic
+	L -- Marina Mijatovic
+	IL -- Marina Mijatovic
+	U --Ilija Stanojkovic --uradjeno 19.11.2011
+	IU -- Ilija Stanojkovic --uradjeno 19.11.2011
+	D -- Bojana Pantic
+	ID --Bojana Pantic
+	F -- Kristina Siladji
+	IF --Kristina Siladji
+Grafika:
+	Staticka slika kocke -- Daniel Siladji --uradjeno 19.11.2011

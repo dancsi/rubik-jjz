@@ -35,7 +35,7 @@ end;
 
 Begin
     StartingCube(c);
-
+	c.U[1, 1]:='O';
     glutDisplayFunc(@DrawCallback);
     glutReshapeFunc(@ReSizeGLScene);
     glutKeyboardFunc(@KeyboardCallback);

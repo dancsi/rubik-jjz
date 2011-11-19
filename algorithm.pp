@@ -21,6 +21,7 @@ Begin
         Begin
             If s[i] In FaceNames Then
                 Begin
+					writeln('Will execute ', buf+s[i]);
                     ExecuteMove(buf+s[i], c);
                     buf := '';
                 End
