@@ -53,7 +53,10 @@ Begin
     Else If move='IR' Then TurnIR(c);
 End;
 
-
+function NextMove(var c: Cube):string;
+begin
+	NextMove:='';
+end;
 
 function Solve(var c: Cube): string;
 var moves: string;
