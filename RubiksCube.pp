@@ -41,6 +41,8 @@ Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
 
 Implementation
 
+uses graphics;
+
 Procedure Swap(Var a, b:char);
 
 Var t:   char;
@@ -133,6 +135,7 @@ Procedure TurnU(Var c: Cube);
 Var 
     pom :   array [1..3] Of char;
 Begin
+	AnimateTurnU(c);
     write('TurnU ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
@@ -156,6 +159,7 @@ Procedure TurnIU(Var c: Cube);
 Var 
     pom :   array [1..3] Of char;
 Begin
+	AnimateTurnIU(c);
     write('IU ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
@@ -179,6 +183,7 @@ Procedure TurnD(Var c: Cube);
 Var 
     a :   array[1..3] Of char;
 Begin
+	AnimateTurnD(c);
     write('D ');
     TurnFaceCW(c.D);
     a[1] := c.F[3,1];
@@ -202,6 +207,7 @@ Procedure TurnID(Var c: Cube);
 Var 
     a :   array[1..3] Of char;
 Begin
+	AnimateTurnID(c);
     write('ID ');
     TurnFaceCCW(c.D);
     a[1] := c.F[3,1];
@@ -222,21 +228,30 @@ Begin
 End;
 Procedure TurnF(Var c: Cube);
 Begin
+	AnimateTurnF(c);
+	write('F ');
 End;
 Procedure TurnIF(Var c: Cube);
 Begin
+	AnimateTurnIF(c);
+	write('IF ');
 End;
 Procedure TurnB(Var c: Cube);
 Begin
+	AnimateTurnB(c);
+	write('B ');
 End;
 Procedure TurnIB(Var c: Cube);
 Begin
+	AnimateTurnIB(c);
+	write('IB ');
 End;
 Procedure TurnR(Var c: Cube);
 
 Var 
     a :   array [1..3] Of char;
 Begin
+	AnimateTurnR(c);
     write('R ');
     TurnFaceCW(c.R);
     a[1] := c.F[1, 3];
@@ -256,13 +271,34 @@ Begin
     c.U[3,3] := a[3];;
 End;
 Procedure TurnIR(Var c: Cube);
+Var 
+    a :   array [1..3] Of char;
 Begin
+	AnimateTurnIR(c);
+    write('IR ');
+    TurnFaceCCW(c.R);
+    a[1] := c.F[1, 3];
+    a[2] := c.F[2, 3];
+    a[3] := c.F[3, 3];
+    c.F[1,3] := c.U[1,3];
+    c.F[2,3] := c.U[2,3];
+    c.F[3,3] := c.U[3,3];
+    c.U[1,3] := c.B[3,1];
+    c.U[2,3] := c.B[2,1];
+    c.U[3,3] := c.B[1,1];
+    c.B[1,1] := c.D[3,3];
+    c.B[2,1] := c.D[2,3];
+    c.B[3,1] := c.D[1,3];
+    c.D[1,3] := a[1];
+    c.D[2,3] := a[2];
+    c.D[3,3] := a[3];;
 End;
 Procedure TurnL(Var c: Cube);
 
 Var 
     a:   array [1..3] Of char;
 Begin
+	AnimateTurnL(c);
     write('L ');
     TurnFaceCw(c.L);
     a[1] := c.F[1,1];
@@ -287,6 +323,7 @@ Var
     a:   array[1..3] Of char;
 
 Begin
+	AnimateTurnIL(c);
     write('IL ');
     TurnFaceCCW(c.L);
     a[1] := c.D[3,1];

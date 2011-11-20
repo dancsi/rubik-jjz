@@ -57,7 +57,7 @@ Begin
 			end;
 		end;
 	end;
-	DumpCube(c);
+	//DumpCube(c);
 End;
 
 Procedure StartUpdatingRotation(x, y:longint);
