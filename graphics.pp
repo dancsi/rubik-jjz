@@ -119,7 +119,7 @@ Begin
                End;
         'O':
                Begin
-                   glColor3ub(255, 180, 0);
+                   glColor3ub(255, 64, 0);
                End;
         'R':
                Begin
@@ -280,7 +280,7 @@ begin
 		glTranslatef(-tx, -ty, -tz);
 		glCallList(rotating);
 		swapBuffers;
-		//Delay(100);
+		Delay(100);
 	end;
 end;
 
@@ -550,22 +550,22 @@ end;
 
 procedure AnimateTurnF(c: Cube);
 begin
-	Animate2ListsRotation(CubeStaticPartDList(c, 'F'), CubeRotatingPartDList(c, 'F'), 0, 0, 1);
+	Animate2ListsRotation(CubeStaticPartDList(c, 'F'), CubeRotatingPartDList(c, 'F'), 0, 0, -1);
 end;
 
 procedure AnimateTurnIF(c: Cube);
 begin
-	Animate2ListsRotation(CubeStaticPartDList(c, 'F'), CubeRotatingPartDList(c, 'F'), 0, 0, -1);
+	Animate2ListsRotation(CubeStaticPartDList(c, 'F'), CubeRotatingPartDList(c, 'F'), 0, 0, 1);
 end;
 
 procedure AnimateTurnB(c: Cube);
 begin
-	Animate2ListsRotation(CubeStaticPartDList(c, 'B'), CubeRotatingPartDList(c, 'B'), 0, 0, -1);
+	Animate2ListsRotation(CubeStaticPartDList(c, 'B'), CubeRotatingPartDList(c, 'B'), 0, 0, 1);
 end;
 
 procedure AnimateTurnIB(c: Cube);
 begin
-	Animate2ListsRotation(CubeStaticPartDList(c, 'B'), CubeRotatingPartDList(c, 'B'), 0, 0, 1);
+	Animate2ListsRotation(CubeStaticPartDList(c, 'B'), CubeRotatingPartDList(c, 'B'), 0, 0, -1);
 end;
 
 Procedure RedrawScreen(c: Cube);
