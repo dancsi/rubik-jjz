@@ -19,6 +19,7 @@ Procedure InitializeGraphics;
 Procedure DrawCube(c: Cube);
 Procedure ReSizeGLScene(Width, Height: Integer);
 cdecl;
+Procedure DrawAxes;
 Procedure ClearScreen;
 Procedure SwapBuffers;
 Procedure RotateCube(x, y:Real; c: Cube);
@@ -61,6 +62,20 @@ Begin
     glutInit(@CmdCount, @Cmd);
 End;
 
+Procedure SetupLights;
+var	param:GLInt;
+	ambientLight : array[1..4] of GLFloat = (0.2, 0.2, 0.2, 0.2);
+	specularLight : array[1..4] of GLFloat = (0.1, 0.1, 0.1, 0.1);
+	position : array[1..3] of GLFloat = (-1.5, 5, 5);
+begin
+	glEnable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+	//glEnable (GL_LIGHT1);
+	glEnable(GL_COLOR_MATERIAL);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, @ambientLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, @specularLight);
+	glLightfv(GL_LIGHT0, GL_POSITION, @position);
+end;
 
 Procedure InitializeGraphics;
 
@@ -68,7 +83,7 @@ Var
     ScreenWidth, ScreenHeight:   Integer;
 Begin
     glutInitPascal(True);
-    glutInitDisplayMode(GLUT_DOUBLE Or GLUT_RGB Or GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE Or GLUT_RGBA Or GLUT_DEPTH);
     glutInitWindowSize(AppWidth, AppHeight);
     ScreenWidth := glutGet(GLUT_SCREEN_WIDTH);
     ScreenHeight := glutGet(GLUT_SCREEN_HEIGHT);
@@ -80,6 +95,7 @@ Begin
     yRot := -30;
     xRot := 20;
 	glShadeModel (GL_SMOOTH);
+	SetupLights;
 End;
 
 Procedure SetGLColor(c: char);

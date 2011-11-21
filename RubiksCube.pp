@@ -227,8 +227,11 @@ Begin
     c.L[3,3] := a[3];
 End;
 Procedure TurnF(Var c: Cube);
+var a1, a2, a3:integer;
 Begin
 	AnimateTurnF(c);
+	TurnFaceCW(c.F);
+	
 	write('F ');
 End;
 Procedure TurnIF(Var c: Cube);
