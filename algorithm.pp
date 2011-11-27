@@ -1,4 +1,3 @@
-
 Unit algorithm;
 
 Interface
@@ -109,7 +108,17 @@ Begin
     c.f[3,2] := c.b[1,2];
     c.f[3,3] := c.b[1,1];
 
-    c.b := a;
+
+    c.b[1,1] := c.a[3,3];
+    c.b[1,2] := c.a[3,2];
+    c.b[1,3] := c.a[3,1];
+    c.b[2,1] := c.a[2,3];
+    c.b[2,2] := c.a[2,2];
+    c.b[2,3] := c.a[2,1];
+    c.b[3,1] := c.a[1,3];
+    c.b[3,2] := c.a[1,2];
+    c.b[3,3] := c.a[1,1];
+
 End;
 
 Function DoUpperLayer(Var c: Cube):   string; {Slaze gornji sloj}
