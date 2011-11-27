@@ -9,6 +9,6 @@ Rotacije:
 	ID --Bojana Pantic
 	F -- Kristina Siladji
 	IF --Kristina Siladji
-	Okretanje kocke naglavacke -- Nemanja Draganic
+	Okretanje kocke naglavacke -- Nemanja Draganic --uradjeno 19.11.2011.
 Grafika:
 	Staticka slika kocke -- Daniel Siladji --uradjeno 19.11.2011
