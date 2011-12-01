@@ -36,7 +36,7 @@ End;
 
 Begin
     StartingCube(c);
-	
+
     glutDisplayFunc(@DrawCallback);
     glutReshapeFunc(@ReSizeGLScene);
     glutKeyboardFunc(@KeyboardCallback);

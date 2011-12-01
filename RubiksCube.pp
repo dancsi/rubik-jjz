@@ -30,9 +30,12 @@ Procedure TurnL(Var c: Cube); {Okrece stranu L u smeru kazaljke na satu}
 Procedure TurnIL(Var c: Cube);
 {Okrece stranu L u smeru suprotnom od smera kretanja kazaljke na satu}
 
+Procedure TurnUpsideDown(Var c: Cube);{Okrece kocku naglavacke}
+
 Procedure TurnFaceCW(Var f: Face);
 {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
-Procedure TurnFaceCCW(Var f: Face); {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
+Procedure TurnFaceCCW(Var f: Face);
+{Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
 Procedure DumpCube(c: Cube);
 
@@ -41,7 +44,7 @@ Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
 
 Implementation
 
-uses graphics;
+Uses graphics;
 
 Procedure Swap(Var a, b:char);
 
@@ -53,27 +56,27 @@ Begin
 End;
 
 Procedure DumpFace(f: Face);
-begin
-	writeln(f[1, 1]:2, f[1, 2]:2, f[1, 3]:2);
-	writeln(f[2, 1]:2, f[2, 2]:2, f[2, 3]:2);
-	writeln(f[3, 1]:2, f[3, 2]:2, f[3, 3]:2);
-end;
+Begin
+    writeln(f[1, 1]:2, f[1, 2]:2, f[1, 3]:2);
+    writeln(f[2, 1]:2, f[2, 2]:2, f[2, 3]:2);
+    writeln(f[3, 1]:2, f[3, 2]:2, f[3, 3]:2);
+End;
 
 Procedure DumpCube(c: Cube);
-begin
-	writeln('F');
-	DumpFace(c.F);
-	writeln('B');
-	DumpFace(c.B);
-	writeln('U');
-	DumpFace(c.U);
-	writeln('D');
-	DumpFace(c.D);
-	writeln('L');
-	DumpFace(c.L);
-	writeln('R');
-	DumpFace(c.R);
-end;
+Begin
+    writeln('F');
+    DumpFace(c.F);
+    writeln('B');
+    DumpFace(c.B);
+    writeln('U');
+    DumpFace(c.U);
+    writeln('D');
+    DumpFace(c.D);
+    writeln('L');
+    DumpFace(c.L);
+    writeln('R');
+    DumpFace(c.R);
+End;
 
 Procedure FillFace(Var f: Face; color: Char);
 Begin
@@ -135,7 +138,7 @@ Procedure TurnU(Var c: Cube);
 Var 
     pom :   array [1..3] Of char;
 Begin
-	AnimateTurnU(c);
+    AnimateTurnU(c);
     write('TurnU ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
@@ -159,7 +162,7 @@ Procedure TurnIU(Var c: Cube);
 Var 
     pom :   array [1..3] Of char;
 Begin
-	AnimateTurnIU(c);
+    AnimateTurnIU(c);
     write('IU ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
@@ -183,7 +186,7 @@ Procedure TurnD(Var c: Cube);
 Var 
     a :   array[1..3] Of char;
 Begin
-	AnimateTurnD(c);
+    AnimateTurnD(c);
     write('D ');
     TurnFaceCW(c.D);
     a[1] := c.F[3,1];
@@ -207,7 +210,7 @@ Procedure TurnID(Var c: Cube);
 Var 
     a :   array[1..3] Of char;
 Begin
-	AnimateTurnID(c);
+    AnimateTurnID(c);
     write('ID ');
     TurnFaceCCW(c.D);
     a[1] := c.F[3,1];
@@ -227,65 +230,67 @@ Begin
     c.L[3,3] := a[3];
 End;
 Procedure TurnF(Var c: Cube);
-var a1, a2, a3:char;
+
+Var a1, a2, a3:   char;
 Begin
-	AnimateTurnF(c);
-	TurnFaceCW(c.F);
-	a1:=c.U[3, 1];
-	a2:=c.U[3, 2];
-	a3:=c.U[3, 3];
-	c.U[3, 1]:=c.L[1, 3];
-	c.U[3, 2]:=c.L[2, 3];
-	c.U[3, 3]:=c.L[3, 3];
-	c.L[1, 3]:=c.D[1, 1];
-	c.L[2, 3]:=c.D[1, 2];
-	c.L[3, 3]:=c.D[1, 3];
-	c.D[1, 1]:=c.R[3, 1];
-	c.D[1, 2]:=c.R[2, 1];
-	c.D[1, 3]:=c.R[1, 1];
-	c.R[1, 1]:=a1;
-	c.R[2, 1]:=a2;
-	c.R[3, 1]:=a3;
-	write('F ');
+    AnimateTurnF(c);
+    TurnFaceCW(c.F);
+    a1 := c.U[3, 1];
+    a2 := c.U[3, 2];
+    a3 := c.U[3, 3];
+    c.U[3, 1] := c.L[1, 3];
+    c.U[3, 2] := c.L[2, 3];
+    c.U[3, 3] := c.L[3, 3];
+    c.L[1, 3] := c.D[1, 1];
+    c.L[2, 3] := c.D[1, 2];
+    c.L[3, 3] := c.D[1, 3];
+    c.D[1, 1] := c.R[3, 1];
+    c.D[1, 2] := c.R[2, 1];
+    c.D[1, 3] := c.R[1, 1];
+    c.R[1, 1] := a1;
+    c.R[2, 1] := a2;
+    c.R[3, 1] := a3;
+    write('F ');
 End;
 Procedure TurnIF(Var c: Cube);
-var a1, a2, a3:char;
+
+Var a1, a2, a3:   char;
 Begin
-	AnimateTurnIF(c);
-	TurnFaceCCW(c.F);
-	a3:=c.R[3, 1];
-	a2:=c.R[2, 1];
-	a1:=c.R[1, 1];
-	c.R[1, 1]:=c.D[1, 3];
-	c.R[2, 1]:=c.D[1, 2];
-	c.R[3, 1]:=c.D[1, 1];
-	c.D[1, 3]:=c.L[3, 3];
-	c.D[1, 2]:=c.L[2, 3];
-	c.D[1, 1]:=c.L[1, 3];
-	c.L[3, 3]:=c.U[3, 3];
-	c.L[2, 3]:=c.U[3, 2];
-	c.L[1, 3]:=c.U[3, 1];
-	c.U[3, 3]:=a3;
-	c.U[3, 2]:=a2;
-	c.U[3, 1]:=a1;
-	write('IF ');
+    AnimateTurnIF(c);
+    TurnFaceCCW(c.F);
+    a3 := c.R[3, 1];
+    a2 := c.R[2, 1];
+    a1 := c.R[1, 1];
+    c.R[1, 1] := c.D[1, 3];
+    c.R[2, 1] := c.D[1, 2];
+    c.R[3, 1] := c.D[1, 1];
+    c.D[1, 3] := c.L[3, 3];
+    c.D[1, 2] := c.L[2, 3];
+    c.D[1, 1] := c.L[1, 3];
+    c.L[3, 3] := c.U[3, 3];
+    c.L[2, 3] := c.U[3, 2];
+    c.L[1, 3] := c.U[3, 1];
+    c.U[3, 3] := a3;
+    c.U[3, 2] := a2;
+    c.U[3, 1] := a1;
+    write('IF ');
 End;
 Procedure TurnB(Var c: Cube);
 Begin
-	AnimateTurnB(c);
-	write('B ');
+    AnimateTurnB(c);
+    write('B ');
 End;
 Procedure TurnIB(Var c: Cube);
 Begin
-	AnimateTurnIB(c);
-	write('IB ');
+    AnimateTurnIB(c);
+    write('IB ');
 End;
 Procedure TurnR(Var c: Cube);
 
 Var 
     a :   array [1..3] Of char;
 Begin
-	AnimateTurnR(c);
+    AnimateTurnR(c);
     write('R ');
     TurnFaceCW(c.R);
     a[1] := c.F[1, 3];
@@ -305,10 +310,11 @@ Begin
     c.U[3,3] := a[3];;
 End;
 Procedure TurnIR(Var c: Cube);
+
 Var 
     a :   array [1..3] Of char;
 Begin
-	AnimateTurnIR(c);
+    AnimateTurnIR(c);
     write('IR ');
     TurnFaceCCW(c.R);
     a[1] := c.F[1, 3];
@@ -332,7 +338,7 @@ Procedure TurnL(Var c: Cube);
 Var 
     a:   array [1..3] Of char;
 Begin
-	AnimateTurnL(c);
+    AnimateTurnL(c);
     write('L ');
     TurnFaceCw(c.L);
     a[1] := c.F[1,1];
@@ -357,7 +363,7 @@ Var
     a:   array[1..3] Of char;
 
 Begin
-	AnimateTurnIL(c);
+    AnimateTurnIL(c);
     write('IL ');
     TurnFaceCCW(c.L);
     a[1] := c.D[3,1];
@@ -375,6 +381,48 @@ Begin
     c.F[1,1] := a[3];
     c.F[2,1] := a[2];
     c.F[3,1] := a[1];
+
+End;
+
+Procedure TurnUpsideDown(Var c: Cube);{Okrece kocku naglavacke}
+
+Var 
+    i,j:   integer;
+    a:   face;
+
+Begin
+    AnimateTurnUpsideDown(c);
+    a := c.d;
+    c.d := c.u;
+    c.u := a;   {zamena gornje i donje strane}
+
+    TurnFaceCW(c.r);
+    turnfaceCW(c.r);        {rotiranje desne i leve strane}
+    TurnFaceCCW(c.L);
+    TurnFaceCCw(c.l);
+
+    a := c.f;               {zamena prednje i zadnje strane}
+
+    c.f[1,1] := c.b[3,3];
+    c.f[1,2] := c.b[3,2];
+    c.f[1,3] := c.b[3,1];
+    c.f[2,1] := c.b[2,3];
+    c.f[2,2] := c.b[2,2];
+    c.f[2,3] := c.b[2,1];
+    c.f[3,1] := c.b[1,3];
+    c.f[3,2] := c.b[1,2];
+    c.f[3,3] := c.b[1,1];
+
+
+    c.b[1,1] := a[3,3];
+    c.b[1,2] := a[3,2];
+    c.b[1,3] := a[3,1];
+    c.b[2,1] := a[2,3];
+    c.b[2,2] := a[2,2];
+    c.b[2,3] := a[2,1];
+    c.b[3,1] := a[1,3];
+    c.b[3,2] := a[1,2];
+    c.b[3,3] := a[1,1];
 
 End;
 
