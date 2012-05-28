@@ -40,12 +40,20 @@ Procedure AnimateTurnIF(c: Cube);
 Procedure AnimateTurnB(c: Cube);
 Procedure AnimateTurnIB(c: Cube);
 Procedure AnimateTurnUpsideDown(c: Cube);
+Procedure ToggleAnimation();
 
 Var YRot, XRot:   real;
 
 Implementation
 
 Uses WinCRT;
+
+Var SuppressAnimation:   Boolean =   False;
+
+Procedure ToggleAnimation;
+Begin
+    SuppressAnimation := Not SuppressAnimation;
+End;
 
 Procedure glutInitPascal(ParseCmdLine: Boolean);
 
@@ -168,6 +176,9 @@ Begin
     glEnable(GL_TEXTURE_2D);
 
 
+
+
+
 {DrawLine(x, y, 0, x, y+l, 0, 2);
 	DrawLine(x, y+l, 0, x+l, y+l, 0, 2);
 	DrawLine(x+l, y+l, 0, x+l, y, 0, 2);
@@ -267,25 +278,28 @@ Var rotAngle:   GLFloat;
     ty:   GLFloat =   1.5*CubieSide;
     tz:   GLFloat =   1.5*CubieSide;
 Begin
-    rotAngle := 0;
-    tx := tx*(1-rx);
-    ty := ty*(1-ry);
-    tz := -tz*(1-rz);
-
-    While (rotAngle<=90) Do
+    If (Not SuppressAnimation) Then
         Begin
-            rotAngle := rotAngle+RotationStep;
-            PrepareForDrawing;
-            clearscreen;
-            glCallList(static);
-            PrepareForDrawing;
-            glTranslatef(tx, ty, tz);
-            //Delay(10000);
-            //DrawAxes;
-            glRotatef(rotAngle, rx, ry, rz);
-            glTranslatef(-tx, -ty, -tz);
-            glCallList(rotating);
-            swapBuffers;
+            rotAngle := 0;
+            tx := tx*(1-rx);
+            ty := ty*(1-ry);
+            tz := -tz*(1-rz);
+
+            While (rotAngle<=90) Do
+                Begin
+                    rotAngle := rotAngle+RotationStep;
+                    PrepareForDrawing;
+                    clearscreen;
+                    glCallList(static);
+                    PrepareForDrawing;
+                    glTranslatef(tx, ty, tz);
+                    //Delay(10000);
+                    //DrawAxes;
+                    glRotatef(rotAngle, rx, ry, rz);
+                    glTranslatef(-tx, -ty, -tz);
+                    glCallList(rotating);
+                    swapBuffers;
+                End;
         End;
 End;
 
@@ -657,6 +671,7 @@ End;
 Procedure RedrawScreen(c: Cube);
 Begin
     ClearScreen;
+
     DrawCube(c);
     SwapBuffers;
 End;

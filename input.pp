@@ -38,6 +38,7 @@ Begin
             buff :=   '';
         End
     Else If ch='I' Then buff := 'I'
+    Else If ch=' ' Then Solve(c)
     Else
         Begin
             Case ch Of 

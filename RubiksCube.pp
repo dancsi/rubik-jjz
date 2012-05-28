@@ -35,6 +35,9 @@ Procedure TurnUpsideDown(Var c: Cube);{Okrece kocku naglavacke}
 Procedure TurnFaceCW(Var f: Face);
 {Okrece datu stranu f u smeru kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 Procedure TurnFaceCCW(Var f: Face);
+
+
+
 {Okrece datu stranu f u smeru suprotnom od smera kretanja kazaljke na satu, ali pri tom ne dirajuci okolne strane}
 
 Procedure DumpCube(c: Cube);
@@ -45,6 +48,8 @@ Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
 Implementation
 
 Uses graphics;
+
+Var SuppressAnimations:   Boolean =   False;
 
 Procedure Swap(Var a, b:char);
 

@@ -1,9 +1,12 @@
+{
+	Koristi se algoritam sa: http://www.scaredcat.demon.co.uk/rubikscube/the_solution.html
+}
 
 Unit algorithm;
 
 Interface
 
-Uses RubiksCube;
+Uses RubiksCube, graphics;
 
 Procedure ExecuteString(s: String; Var c: Cube); {Izvrsava vise naredbi, npr "FUDLIF"}
 Procedure ExecuteMove(move: String; Var c: Cube); {Izvrsava jednu naredbu, npr "R" ili "IR"}
@@ -15,6 +18,7 @@ Function NextMove(Var c: Cube):   string;
 Function DoUpperLayer(Var c: Cube):   string; {Slaze gornji sloj}
 Function DoMiddleLayer(Var c: Cube):   string; {Slaze Srednji sloj}
 Function DoLowerLayer(Var c: Cube):   string; {Slaze donji sloj}
+Function FaceSolved(Var f: Face):   Boolean;
 
 Implementation
 
@@ -62,8 +66,20 @@ End;
 
 Function Solved(c: Cube):   Boolean;
 Begin
+    Solved := FaceSolved(c.F) And FaceSolved(c.B) And FaceSolved(c.L) And FaceSolved(c.R) And
+              FaceSolved(c.U) And FaceSolved(c.D);
+End;
 
-    Solved := false;
+Function FaceSolved(Var f: Face):   Boolean;
+
+Var r:   Boolean;
+    i, j:   integer;
+Begin
+    r := True;
+    For i:=1 To 3 Do
+        For j:=1 To 3 Do
+            r := r And (f[i, j]=f[2, 2]);
+    FaceSolved := r;
 End;
 
 Function Shuffle(Var c: Cube):   string;
@@ -84,18 +100,27 @@ End;
 Function Solve(Var c: Cube):   string;
 
 Var moves:   string;
+    orig:   Cube;
 Begin
-    While Not Solved(c) Do
-        Begin
-            moves := moves+NextMove(c);
-        End;
+	writeln('Solving');
+    moves :=   '';
+    orig := c;
+	ToggleAnimation;
+    moves := moves+DoUpperLayer(c);
+	ToggleAnimation;
+	ExecuteString(moves, orig);
+	writeln('Solved');
     Solve := moves;
 End;
 
 
 Function DoUpperLayer(Var c: Cube):   string; {Slaze gornji sloj}
+
+Var moves:   string;
 Begin
-    DoUpperLayer := '';
+    moves := '';
+
+    DoUpperLayer := moves;
 End;
 Function DoMiddleLayer(Var c: Cube):   string; {Slaze Srednji sloj}
 Begin
