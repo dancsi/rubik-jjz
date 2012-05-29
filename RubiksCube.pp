@@ -11,6 +11,8 @@ End;
 
 Const FaceNames =   ['F', 'B', 'U', 'D', 'L', 'R']; {Imena stranica}
 
+var Logging: Boolean = True;
+
 Procedure TurnU(Var c: Cube); {Okrece stranu U u smeru kazaljke na satu}
 Procedure TurnIU(Var c: Cube);
 {Okrece stranu U u smeru suprotnom od smera kretanja kazaljke na satu}
@@ -44,12 +46,11 @@ Procedure DumpCube(c: Cube);
 
 Procedure StartingCube(Var c: Cube); {Podesava kocku na pocetni polozaj}
 Procedure Swap(Var a, b:char); {Swapuje 2 karaktera}
+procedure ToggleLogging(b: Boolean);
 
 Implementation
 
 Uses graphics;
-
-Var SuppressAnimations:   Boolean =   False;
 
 Procedure Swap(Var a, b:char);
 
@@ -59,6 +60,11 @@ Begin
     a := b;
     b := t;
 End;
+
+procedure ToggleLogging(b: Boolean);
+begin
+	Logging:= b;
+end;
 
 Procedure DumpFace(f: Face);
 Begin
@@ -144,7 +150,7 @@ Var
     pom :   array [1..3] Of char;
 Begin
     AnimateTurnU(c);
-    write('TurnU ');
+	if Logging then write('U ');
     TurnFaceCW(c.U);
     pom[1] := c.F[1, 1];
     pom[2] := c.F[1, 2];
@@ -168,8 +174,8 @@ Var
     pom :   array [1..3] Of char;
 Begin
     AnimateTurnIU(c);
-    write('IU ');
-    TurnFaceCW(c.U);
+    if Logging then write('IU ');
+    TurnFaceCCW(c.U);
     pom[1] := c.F[1, 1];
     pom[2] := c.F[1, 2];
     pom[3] := c.F[1, 3];
@@ -192,7 +198,7 @@ Var
     a :   array[1..3] Of char;
 Begin
     AnimateTurnD(c);
-    write('D ');
+    if Logging then write('D ');
     TurnFaceCW(c.D);
     a[1] := c.F[3,1];
     a[2] := c.F[3,2];
@@ -216,7 +222,7 @@ Var
     a :   array[1..3] Of char;
 Begin
     AnimateTurnID(c);
-    write('ID ');
+    if Logging then write('ID ');
     TurnFaceCCW(c.D);
     a[1] := c.F[3,1];
     a[2] := c.F[3,2];
@@ -239,6 +245,7 @@ Procedure TurnF(Var c: Cube);
 Var a1, a2, a3:   char;
 Begin
     AnimateTurnF(c);
+	if Logging then write('F ');
     TurnFaceCW(c.F);
     a1 := c.U[3, 1];
     a2 := c.U[3, 2];
@@ -255,13 +262,13 @@ Begin
     c.R[1, 1] := a1;
     c.R[2, 1] := a2;
     c.R[3, 1] := a3;
-    write('F ');
 End;
 Procedure TurnIF(Var c: Cube);
 
 Var a1, a2, a3:   char;
 Begin
     AnimateTurnIF(c);
+	if Logging then write('IF ');
     TurnFaceCCW(c.F);
     a3 := c.R[3, 1];
     a2 := c.R[2, 1];
@@ -278,17 +285,16 @@ Begin
     c.U[3, 3] := a3;
     c.U[3, 2] := a2;
     c.U[3, 1] := a1;
-    write('IF ');
 End;
 Procedure TurnB(Var c: Cube);
 Begin
     AnimateTurnB(c);
-    write('B ');
+    if Logging then write('B ');
 End;
 Procedure TurnIB(Var c: Cube);
 Begin
     AnimateTurnIB(c);
-    write('IB ');
+    if Logging then write('IB ');
 End;
 Procedure TurnR(Var c: Cube);
 
@@ -296,7 +302,7 @@ Var
     a :   array [1..3] Of char;
 Begin
     AnimateTurnR(c);
-    write('R ');
+    if Logging then write('R ');
     TurnFaceCW(c.R);
     a[1] := c.F[1, 3];
     a[2] := c.F[2, 3];
@@ -320,7 +326,7 @@ Var
     a :   array [1..3] Of char;
 Begin
     AnimateTurnIR(c);
-    write('IR ');
+    if Logging then write('IR ');
     TurnFaceCCW(c.R);
     a[1] := c.F[1, 3];
     a[2] := c.F[2, 3];
@@ -344,7 +350,7 @@ Var
     a:   array [1..3] Of char;
 Begin
     AnimateTurnL(c);
-    write('L ');
+    if Logging then write('L ');
     TurnFaceCw(c.L);
     a[1] := c.F[1,1];
     a[2] := c.F[2,1];
@@ -369,7 +375,7 @@ Var
 
 Begin
     AnimateTurnIL(c);
-    write('IL ');
+    if Logging then write('IL ');
     TurnFaceCCW(c.L);
     a[1] := c.D[3,1];
     a[2] := c.D[2,1];

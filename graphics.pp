@@ -40,7 +40,7 @@ Procedure AnimateTurnIF(c: Cube);
 Procedure AnimateTurnB(c: Cube);
 Procedure AnimateTurnIB(c: Cube);
 Procedure AnimateTurnUpsideDown(c: Cube);
-Procedure ToggleAnimation();
+Procedure ToggleAnimation(b: Boolean);
 
 Var YRot, XRot:   real;
 
@@ -48,11 +48,11 @@ Implementation
 
 Uses WinCRT;
 
-Var SuppressAnimation:   Boolean =   False;
+Var Animation:   Boolean =   True;
 
-Procedure ToggleAnimation;
+Procedure ToggleAnimation(b: Boolean);
 Begin
-    SuppressAnimation := Not SuppressAnimation;
+    Animation := b;
 End;
 
 Procedure glutInitPascal(ParseCmdLine: Boolean);
@@ -278,7 +278,7 @@ Var rotAngle:   GLFloat;
     ty:   GLFloat =   1.5*CubieSide;
     tz:   GLFloat =   1.5*CubieSide;
 Begin
-    If (Not SuppressAnimation) Then
+    If (Animation) Then
         Begin
             rotAngle := 0;
             tx := tx*(1-rx);
