@@ -11,7 +11,7 @@ Uses RubiksCube, graphics, crt;
 Procedure ExecuteString(s: String; Var c: Cube); {Izvrsava vise naredbi, npr "FUDLIF"}
 Procedure ExecuteMove(move: String; Var c: Cube); {Izvrsava jednu naredbu, npr "R" ili "IR"}
 Function Shuffle(Var c: Cube):   string; {Stavlja kocku u slucajan polozaj}
-Function Solved(var c: Cube):   boolean; {Da li je kocka resena}
+Function Solved(Var c: Cube):   boolean; {Da li je kocka resena}
 Function Solve(Var c: Cube):   string; {Resava kocku. Samo ovo se poziva iz glavnog programa}
 Function NextMove(Var c: Cube):   string;
 {Odlucuje koji ce biti sledeci potez i vraca string sa naredbama}
@@ -64,7 +64,7 @@ Begin
     NextMove := '';
 End;
 
-Function Solved(var c: Cube):   Boolean;
+Function Solved(Var c: Cube):   Boolean;
 Begin
     Solved := FaceSolved(c.F) And FaceSolved(c.B) And FaceSolved(c.L) And FaceSolved(c.R) And
               FaceSolved(c.U) And FaceSolved(c.D);
@@ -75,7 +75,9 @@ Function FaceSolved(Var f: Face):   Boolean;
 Var r:   Boolean;
     i, j:   integer;
 Begin
-    FaceSolved := (f[2, 2]=f[1, 1]) and (f[2, 2]=f[1, 2]) and (f[2, 2]=f[1, 3]) and (f[2, 2]=f[2, 1]) and (f[2, 2]=f[2, 3]) and (f[2, 2]=f[3, 1]) and (f[2, 2]=f[3, 2]) and (f[2, 2]=f[3, 3]);
+    FaceSolved := (f[2, 2]=f[1, 1]) And (f[2, 2]=f[1, 2]) And (f[2, 2]=f[1, 3]) And (f[2, 2]=f[2, 1]
+                  ) And (f[2, 2]=f[2, 3]) And (f[2, 2]=f[3, 1]) And (f[2, 2]=f[3, 2]) And (f[2, 2]=f
+                  [3, 3]);
 End;
 
 Function Shuffle(Var c: Cube):   string;
@@ -93,101 +95,105 @@ Begin
     Shuffle := r;
 End;
 
-var movebuf: array[1..50] of string;
-	tmp, resmoves: integer;
-	
-Function DFS(var c: Cube; moveno, limit: integer): integer;
-begin
-	if Solved(c) then exit(moveno)
-	else inc(moveno);
-	
-	if moveno>limit then begin 
-		if Logging then writeln('... no luck');
-		exit(-1);
-	end
-	else begin
-		
-		TurnU(c);
-		movebuf[moveno]:='U';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnIU(c);
-		TurnIU(c);
-		movebuf[moveno]:='IU';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnU(c);
-		
-		TurnD(c);
-		movebuf[moveno]:='D';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnID(c);
-		TurnID(c);
-		movebuf[moveno]:='ID';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnD(c);
-		
-		TurnF(c);
-		movebuf[moveno]:='F';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnIF(c);
-		TurnIF(c);
-		movebuf[moveno]:='IF';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnF(c);
-		
-		TurnL(c);
-		movebuf[moveno]:='L';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnIL(c);
-		TurnIL(c);
-		movebuf[moveno]:='IL';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnL(c);
-		
-		TurnR(c);
-		movebuf[moveno]:='R';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnIR(c);
-		TurnIR(c);
-		movebuf[moveno]:='IR';
-		tmp:=DFS(c, moveno, limit);
-		if tmp<>-1 then exit(tmp);
-		TurnR(c);
-		
-	end;
-	DFS:=-1;
-end;
+Var movebuf:   array[1..50] Of string;
+    tmp, resmoves:   integer;
+
+Function DFS(Var c: Cube; moveno, limit: integer):   integer;
+Begin
+    If Solved(c) Then exit(moveno)
+    Else inc(moveno);
+
+    If moveno>limit Then
+        Begin
+            If Logging Then writeln('... no luck');
+            exit(-1);
+        End
+    Else
+        Begin
+
+            TurnU(c);
+            movebuf[moveno] := 'U';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnIU(c);
+            TurnIU(c);
+            movebuf[moveno] := 'IU';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnU(c);
+
+            TurnD(c);
+            movebuf[moveno] := 'D';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnID(c);
+            TurnID(c);
+            movebuf[moveno] := 'ID';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnD(c);
+
+            TurnF(c);
+            movebuf[moveno] := 'F';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnIF(c);
+            TurnIF(c);
+            movebuf[moveno] := 'IF';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnF(c);
+
+            TurnL(c);
+            movebuf[moveno] := 'L';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnIL(c);
+            TurnIL(c);
+            movebuf[moveno] := 'IL';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnL(c);
+
+            TurnR(c);
+            movebuf[moveno] := 'R';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnIR(c);
+            TurnIR(c);
+            movebuf[moveno] := 'IR';
+            tmp := DFS(c, moveno, limit);
+            If tmp<>-1 Then exit(tmp);
+            TurnR(c);
+
+        End;
+    DFS := -1;
+End;
 
 Function Solve(Var c: Cube):   string;
 
 Var moves:   string;
     orig:   Cube;
-	MaxDepth, i: integer;
+    MaxDepth, i:   integer;
 Begin
-	writeln('Solving');
+    writeln('Solving');
     moves :=   '';
     orig := c;
-	ToggleAnimation(False); 
-	ToggleLogging(False);
-    for MaxDepth:=1 to 20 do begin
-		writeln('Trying with ', MaxDepth, ' moves');
-		resmoves:=DFS(c, 0, MaxDepth);
-		if resmoves<>-1 then break;
-		writeln;
-	end;
-	ToggleAnimation(True); 
-	ToggleLogging(True);
-	writeln('Solved');
-	for i:=1 to resmoves do moves:=moves+movebuf[i];
-	ExecuteString(moves, orig);
+    ToggleAnimation(False);
+    ToggleLogging(False);
+    For MaxDepth:=1 To 20 Do
+        Begin
+            writeln('Trying with ', MaxDepth, ' moves');
+            resmoves := DFS(c, 0, MaxDepth);
+            If resmoves<>-1 Then break;
+            writeln;
+        End;
+    ToggleAnimation(True);
+    ToggleLogging(True);
+    writeln('Solved');
+    For i:=1 To resmoves Do
+        moves := moves+movebuf[i];
+    ExecuteString(moves, orig);
     Solve := moves;
 End;
 
